@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package LecturerModule;
 
 
@@ -16,4 +17,18 @@ public class Lecturer extends UserModule.User{
     public int getID() {
         return id;
     }    
+=======
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package LecturerModule;
+
+/**
+ *
+ * @author Ahmed Nagah
+ */
+public class Lecturer {
+    
+>>>>>>> parent of b9a1be2 (jiuhh)
 }
