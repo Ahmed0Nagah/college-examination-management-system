@@ -68,7 +68,7 @@ public abstract class User {
         String[] data = newcontent.split(" ");
         if (data.length <= 4) {
             try (PrintWriter write = new PrintWriter((new FileWriter(pathname, true)))) {
-                write.println(newcontent);
+                write.print("\n"+newcontent);
 
             } catch (Exception e) {
 
@@ -84,7 +84,7 @@ public abstract class User {
     
     public static void main(String[] args) {
         User user = new Lecturer("Ahmed", "1234");
-//        user.filewriter("src\\Lecturers.txt", "7 ronaldo 3mmessi history");
+        user.filewriter("src\\Lecturers.txt", "7 ronaldo 3mmessi history");
         user.printAllContnet("src\\Lecturers.txt");
         
         
