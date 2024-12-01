@@ -64,8 +64,27 @@ public abstract class User {
         
     }
     
+    public void filewriter(String pathname, String newcontent) {
+        String[] data = newcontent.split(" ");
+        if (data.length <= 4) {
+            try (PrintWriter write = new PrintWriter((new FileWriter(pathname, true)))) {
+                write.println(newcontent);
+
+            } catch (Exception e) {
+
+                System.out.println("The file not found!\n");
+
+            }
+        } else {
+            System.out.println("Invalid format!\n");
+        }
+
+    }
+    
+    
     public static void main(String[] args) {
         User user = new Lecturer("Ahmed", "1234");
+//        user.filewriter("src\\Lecturers.txt", "7 ronaldo 3mmessi history");
         user.printAllContnet("src\\Lecturers.txt");
         
         
