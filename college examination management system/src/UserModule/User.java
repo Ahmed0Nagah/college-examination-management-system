@@ -38,7 +38,7 @@ public abstract class User {
         try(Scanner fileReader = new Scanner(new File(pathName))) {
             while(fileReader.hasNext()){
                 String line = fileReader.nextLine();
-                String [] arr = line.split(",");
+                String [] arr = line.split(" ");
                 
                 if(arr.length <= 4){
                     String id = arr[0].trim();
@@ -46,10 +46,10 @@ public abstract class User {
                     String passwordd = arr[2].trim();
                     String courseName = arr[3].trim();
                     
-                    System.out.println("The id is : "+ id);
-                    System.out.println("The username is : "+ username);
-                    System.out.println("The password is : "+ passwordd);
-                    System.out.println("The course name is : "+ courseName);
+                    System.out.println("Id is : "+ id);
+                    System.out.println("Username is : "+ username);
+                    System.out.println("Password is : "+ passwordd);
+                    System.out.println("Course name is : "+ courseName);
                     System.out.println("************************");
                 }
                 else{
