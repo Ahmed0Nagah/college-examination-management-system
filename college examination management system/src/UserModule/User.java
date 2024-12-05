@@ -2,6 +2,7 @@ package UserModule;
 
 import LecturerModule.Lecturer;
 import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public abstract class User {
@@ -84,9 +85,8 @@ public abstract class User {
     
     public static void main(String[] args) {
         User user = new Lecturer("Ahmed", "1234");
-        user.filewriter("src\\Lecturers.txt", "7 ronaldo 3mmessi history");
-        user.printAllContnet("src\\Lecturers.txt");
-        
+//        user.filewriter("src\\Lecturers.txt", "7 ronaldo 3mmessi history");
+//        user.printAllContnet("src\\Lecturers.txt");
         
     }
 }
