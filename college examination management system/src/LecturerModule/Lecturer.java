@@ -11,6 +11,7 @@ public class Lecturer extends UserModule.User{
     
     protected void setID(int id) {
         Lecturer.id = id;
+        System.out.println("Hello");
     }
 
     public int getID() {
