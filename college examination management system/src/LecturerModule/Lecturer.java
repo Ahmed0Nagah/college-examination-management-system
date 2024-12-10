@@ -17,6 +17,10 @@ public class Lecturer extends UserModule.User{
         return id;
     }    
     
+    public void addExam(){
+        
+    }
+    
     
 }
 
