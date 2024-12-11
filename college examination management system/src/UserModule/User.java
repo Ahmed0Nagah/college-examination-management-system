@@ -31,8 +31,8 @@ public abstract class User {
         return password;
     }
 
-    public String getName(){
-        return userName;
+    public String getName(User u){
+        return u.userName;
     }
     
     public  void printAllContnet(String pathName){

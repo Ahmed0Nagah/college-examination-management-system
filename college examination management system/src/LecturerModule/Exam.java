@@ -7,7 +7,8 @@ public class Exam {
     private String duration;
     private ArrayList<String> correctAnswers;
 
-    public Exam() {
+    public Exam(ArrayList<String>questions , String duration,
+            ArrayList<String> correctAnswers) {
         
         this.questions = questions;
         this.duration = duration;
@@ -35,8 +36,7 @@ public class Exam {
     }
 
     public ArrayList<String> getQuestions() {
-     
-        return questions ;
+        return questions;
     }
     
     

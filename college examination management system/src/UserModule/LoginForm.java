@@ -23,6 +23,15 @@ public class LoginForm extends javax.swing.JFrame {
         
         getRootPane().setDefaultButton(loginButton);
     }
+    
+    public String getname(){
+        String name = usernameField.getText();
+        return name;
+    }
+    public String getPassword(){
+        String password = passwordField.getText();
+        return password;
+    }
 
     
 
@@ -153,7 +162,7 @@ public class LoginForm extends javax.swing.JFrame {
 
                     if(content[1].equals(userName) && content[2].equals(password)){
                         dispose();
-                        new LecturerForm(new Lecturer(userName, password)).setVisible(true);
+                        new LecturerForm().setVisible(true);
                     }
                 }
                 errorJLabel.setVisible(true);
