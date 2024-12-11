@@ -25,6 +25,7 @@ public class LecturerForm extends javax.swing.JFrame {
      */
     public LecturerForm() {
         initComponents();
+        
     }
 
         
