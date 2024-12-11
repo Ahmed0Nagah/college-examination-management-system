@@ -536,10 +536,9 @@ public class LecturerForm extends javax.swing.JFrame {
          
          frist.setCorrectAnswers(correctAnswer);
          
-          for(int i=0;i<=question.size();i++){
-            showquestion.setText(question.get(i));
-          }
-       
+         
+             showquestion.setText(frist.getQuestions().toString());
+      
       
         
         
