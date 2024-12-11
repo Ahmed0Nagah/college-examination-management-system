@@ -35,7 +35,8 @@ public class Exam {
     }
 
     public ArrayList<String> getQuestions() {
-        return questions;
+     
+        return questions ;
     }
     
     

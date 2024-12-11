@@ -540,7 +540,7 @@ public class LecturerForm extends javax.swing.JFrame {
              showquestion.setText(frist.getQuestions().toString());
       
       
-        
+        fff
         
          
     }//GEN-LAST:event_SubmitActionPerformed
