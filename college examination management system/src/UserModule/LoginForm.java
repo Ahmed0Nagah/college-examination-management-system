@@ -23,6 +23,15 @@ public class LoginForm extends javax.swing.JFrame {
         
         getRootPane().setDefaultButton(loginButton);
     }
+    
+    public String getname(){
+        String name = usernameField.getText();
+        return name;
+    }
+    public String getPassword(){
+        String password = passwordField.getText();
+        return password;
+    }
 
     
 
