@@ -27,6 +27,7 @@ public class LecturerForm extends javax.swing.JFrame {
       
         
         System.out.println("sass");
+          System.out.println("sass");
     }
 
         
