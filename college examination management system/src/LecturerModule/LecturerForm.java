@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class LecturerForm extends javax.swing.JFrame {
    
-      
+       
       
           /*
           correctAnswer.add("hrhr");
@@ -142,7 +142,7 @@ public class LecturerForm extends javax.swing.JFrame {
         });
 
         showquestion.setEditable(false);
-        showquestion.setColumns(showquestion.getColumns());
+        showquestion.setText(showquestion.getText());
         showquestion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 showquestionActionPerformed(evt);
@@ -526,6 +526,7 @@ public class LecturerForm extends javax.swing.JFrame {
           /*
           correctAnswer.add("hrhr");
           */
+          
         Exam frist=new Exam();
           frist.setDuration(setduration.getText());
           question.add(setQuestion.getText()
@@ -534,12 +535,12 @@ public class LecturerForm extends javax.swing.JFrame {
          frist.setQuestions(question);
          
          frist.setCorrectAnswers(correctAnswer);
+         
           for(int i=0;i<=question.size();i++){
             showquestion.setText(question.get(i));
           }
        
-
-        
+      
         
         
          
