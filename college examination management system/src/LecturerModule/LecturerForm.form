@@ -280,8 +280,8 @@
                     <Component class="javax.swing.JTextField" name="showquestion">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="columns" type="int" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                          <Connection component="showquestion" name="getColumns" type="method"/>
+                        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
+                          <Connection component="showquestion" name="getText" type="method"/>
                         </Property>
                       </Properties>
                       <Events>
