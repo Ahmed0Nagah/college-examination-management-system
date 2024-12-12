@@ -7,12 +7,8 @@ public class Exam {
     private String duration;
     private ArrayList<String> correctAnswers;
 
-    public Exam(ArrayList<String>questions , String duration,
-            ArrayList<String> correctAnswers) {
+    public Exam() {
         
-        this.questions = questions;
-        this.duration = duration;
-        this.correctAnswers = correctAnswers;
     }
 
     public void setCorrectAnswers(ArrayList<String> correctAnswers) {
@@ -36,7 +32,8 @@ public class Exam {
     }
 
     public ArrayList<String> getQuestions() {
-        return questions;
+     
+        return questions ;
     }
     
     
