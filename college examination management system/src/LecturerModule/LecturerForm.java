@@ -18,10 +18,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
-/**
- *
- * @author Ahmed Nagah
- */
+
+
 public class LecturerForm extends javax.swing.JFrame {
         
     
