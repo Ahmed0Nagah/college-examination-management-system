@@ -15,7 +15,7 @@ public abstract class User {
         this.userName = userName;
         this.password = password;
     }
-    protected abstract void setID(int id);
+    
     public abstract int getID();
 
     protected void setPassword(String password) {
@@ -27,7 +27,7 @@ public abstract class User {
     }
 
     
-    public String getPassword() {
+    private String getPassword() {
         return password;
     }
 
