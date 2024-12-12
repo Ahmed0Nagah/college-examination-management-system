@@ -17,15 +17,31 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 /**
  *
  * @author Ahmed Nagah
  */
 public class LecturerForm extends javax.swing.JFrame {
-   
+        
+    
+    DefaultListModel<String>question=new   DefaultListModel <>();  
+
+    
+    Exam examm=new Exam ();
+    
+  
+    ArrayList<String> ques=new ArrayList<>();
+    ArrayList<String> correct=new ArrayList<>();
+    ArrayList<String> duration=new ArrayList<>();
+    
+    
     public LecturerForm(Lecturer lecturer) {
         initComponents();
         helloMessege.setText("Hello, "+lecturer.getName());
+        
+   
+        
     }
 
         
@@ -53,21 +69,25 @@ public class LecturerForm extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         setduration = new javax.swing.JTextField();
         Submit = new java.awt.Button();
-        showquestion = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        showquestion = new javax.swing.JList<>();
+        REMOVEquestion = new java.awt.Button();
+        AddQuestion = new java.awt.Button();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        setQuestion1 = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox<>();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        CorrectAnswer1 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        setduration1 = new javax.swing.JTextField();
         Submit1 = new java.awt.Button();
-        Submit2 = new java.awt.Button();
-        Submit3 = new java.awt.Button();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        showquestion1 = new javax.swing.JList<>();
+        Submit5 = new java.awt.Button();
+        AddQuestion1 = new java.awt.Button();
         jPanel3 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -128,21 +148,41 @@ public class LecturerForm extends javax.swing.JFrame {
             }
         });
 
+        Submit.setActionCommand("submit");
         Submit.setBackground(new java.awt.Color(255, 153, 51));
         Submit.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         Submit.setForeground(new java.awt.Color(255, 255, 255));
-        Submit.setLabel("Add Quesstion");
+        Submit.setLabel("submit");
         Submit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SubmitActionPerformed(evt);
             }
         });
 
-        showquestion.setEditable(false);
-        showquestion.setText(showquestion.getText());
-        showquestion.addActionListener(new java.awt.event.ActionListener() {
+        showquestion.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(showquestion);
+
+        REMOVEquestion.setBackground(new java.awt.Color(255, 153, 51));
+        REMOVEquestion.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        REMOVEquestion.setForeground(new java.awt.Color(255, 255, 255));
+        REMOVEquestion.setLabel("remove");
+        REMOVEquestion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                showquestionActionPerformed(evt);
+                REMOVEquestionActionPerformed(evt);
+            }
+        });
+
+        AddQuestion.setBackground(new java.awt.Color(255, 153, 51));
+        AddQuestion.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        AddQuestion.setForeground(new java.awt.Color(255, 255, 255));
+        AddQuestion.setLabel("Add Quesstion");
+        AddQuestion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddQuestionActionPerformed(evt);
             }
         });
 
@@ -150,10 +190,6 @@ public class LecturerForm extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(156, 156, 156)
-                .addComponent(Submit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -161,17 +197,28 @@ public class LecturerForm extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 200, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(setQuestion)
                     .addComponent(jComboBox1, 0, 164, Short.MAX_VALUE)
                     .addComponent(CorrectAnswer)
                     .addComponent(setduration))
                 .addGap(14, 14, 14))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(showquestion, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(42, 42, 42))
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(AddQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(REMOVEquestion, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel4Layout.createSequentialGroup()
+                            .addGap(40, 40, 40)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(Submit, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,12 +239,18 @@ public class LecturerForm extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(CorrectAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3))
-                .addGap(43, 43, 43)
-                .addComponent(showquestion, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(REMOVEquestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(Submit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
+
+        Submit.getAccessibleContext().setAccessibleName("submit");
 
         jTabbedPane3.addTab("Create exam", jPanel4);
 
@@ -207,6 +260,12 @@ public class LecturerForm extends javax.swing.JFrame {
 
         jLabel7.setText("Correct Answer :");
 
+        setQuestion1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setQuestion1ActionPerformed(evt);
+            }
+        });
+
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Multiple Choice", "True/False", "Short Answer" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,66 +273,91 @@ public class LecturerForm extends javax.swing.JFrame {
             }
         });
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        CorrectAnswer1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-
-        jTextField7.setEditable(false);
-        jTextField7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField7ActionPerformed(evt);
+                CorrectAnswer1ActionPerformed(evt);
             }
         });
 
         jLabel8.setText("Duration :");
 
+        setduration1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                setduration1ActionPerformed(evt);
+            }
+        });
+
+        Submit1.setActionCommand("submit");
         Submit1.setBackground(new java.awt.Color(255, 153, 51));
         Submit1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         Submit1.setForeground(new java.awt.Color(255, 255, 255));
-        Submit1.setLabel("Add Quesstion");
+        Submit1.setLabel("submit");
+        Submit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Submit1ActionPerformed(evt);
+            }
+        });
 
-        Submit2.setBackground(new java.awt.Color(255, 153, 51));
-        Submit2.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        Submit2.setForeground(new java.awt.Color(255, 255, 255));
-        Submit2.setLabel("remove question");
+        showquestion1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(showquestion1);
 
-        Submit3.setBackground(new java.awt.Color(255, 153, 51));
-        Submit3.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        Submit3.setForeground(new java.awt.Color(255, 255, 255));
-        Submit3.setLabel("Edit Question");
+        Submit5.setBackground(new java.awt.Color(255, 153, 51));
+        Submit5.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        Submit5.setForeground(new java.awt.Color(255, 255, 255));
+        Submit5.setLabel("remove");
+        Submit5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Submit5ActionPerformed(evt);
+            }
+        });
+
+        AddQuestion1.setBackground(new java.awt.Color(255, 153, 51));
+        AddQuestion1.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        AddQuestion1.setForeground(new java.awt.Color(255, 255, 255));
+        AddQuestion1.setLabel("Add Quesstion");
+        AddQuestion1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AddQuestion1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
         jPanel6Layout.setHorizontalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(setQuestion1)
+                    .addComponent(jComboBox2, 0, 164, Short.MAX_VALUE)
+                    .addComponent(CorrectAnswer1)
+                    .addComponent(setduration1))
+                .addGap(14, 14, 14))
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(AddQuestion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(Submit5, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel6Layout.createSequentialGroup()
+                            .addGap(40, 40, 40)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField7, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel6Layout.createSequentialGroup()
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(jTextField5)
-                                    .addComponent(jComboBox2, 0, 164, Short.MAX_VALUE)
-                                    .addComponent(jTextField6)
-                                    .addComponent(jTextField8))))
-                        .addGap(21, 21, 21))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
-                        .addComponent(Submit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                        .addComponent(Submit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(23, 23, 23)
-                        .addComponent(Submit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGap(150, 150, 150)
+                        .addComponent(Submit1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,10 +365,10 @@ public class LecturerForm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(setduration1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(setQuestion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -292,23 +376,24 @@ public class LecturerForm extends javax.swing.JFrame {
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(CorrectAnswer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Submit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Submit2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Submit3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Submit5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddQuestion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(Submit1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 474, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -317,7 +402,7 @@ public class LecturerForm extends javax.swing.JFrame {
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 418, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel5Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -335,7 +420,7 @@ public class LecturerForm extends javax.swing.JFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 453, Short.MAX_VALUE)
+            .addComponent(jTabbedPane3)
         );
 
         jTabbedPane2.addTab("Exam Management", jPanel1);
@@ -344,7 +429,7 @@ public class LecturerForm extends javax.swing.JFrame {
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 462, Short.MAX_VALUE)
+            .addGap(0, 474, Short.MAX_VALUE)
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -393,7 +478,7 @@ public class LecturerForm extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(158, Short.MAX_VALUE)
+                        .addContainerGap(170, Short.MAX_VALUE)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57))
                     .addGroup(jPanel2Layout.createSequentialGroup()
@@ -490,18 +575,14 @@ public class LecturerForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
-                        .addComponent(helloMessege, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jTabbedPane2)))
+                .addGap(16, 16, 16)
+                .addComponent(helloMessege, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                .addComponent(jButton3)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4)
                 .addContainerGap())
+            .addComponent(jTabbedPane2, javax.swing.GroupLayout.Alignment.TRAILING)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -525,19 +606,9 @@ public class LecturerForm extends javax.swing.JFrame {
 
     private void CorrectAnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorrectAnswerActionPerformed
         // TODO add your handling code here:
+           correct.add(CorrectAnswer.getText());
+   
     }//GEN-LAST:event_CorrectAnswerActionPerformed
-
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox2ActionPerformed
-
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
-
-    private void jTextField7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField7ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField7ActionPerformed
 
     private void setdurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setdurationActionPerformed
     
@@ -545,38 +616,18 @@ public class LecturerForm extends javax.swing.JFrame {
     }//GEN-LAST:event_setdurationActionPerformed
 
     private void SubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitActionPerformed
-        // TODO add your handling code here:
-              ArrayList<String>question=new ArrayList<>();
-          ArrayList<String> correctAnswer=new ArrayList<>(); 
-          /*
-          correctAnswer.add("hrhr");
-          */
-          
-        Exam frist=new Exam();
-          frist.setDuration(setduration.getText());
-          question.add(setQuestion.getText()
-          );
-         correctAnswer.add(CorrectAnswer.getText());
-         frist.setQuestions(question);
-         
-         frist.setCorrectAnswers(correctAnswer);
-         
-         
-             showquestion.setText(frist.getQuestions().toString());
-      
-      
-       
-        
+       /*
+        question.addElement(setQuestion.getText());
+        */
+          examm.setDuration(setduration.getText());
+         examm.setQuestions(ques);
+         examm.setCorrectAnswers(correct);
          
     }//GEN-LAST:event_SubmitActionPerformed
 
     private void setQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setQuestionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_setQuestionActionPerformed
-
-    private void showquestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_showquestionActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_showquestionActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
@@ -588,6 +639,54 @@ public class LecturerForm extends javax.swing.JFrame {
         dispose();
         new MainMenu().setVisible(true);
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void REMOVEquestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REMOVEquestionActionPerformed
+        // TODO add your handling code here:
+        try {  question.remove(   showquestion.getSelectedIndex());
+        ques.remove(showquestion.getSelectedIndex());
+        correct.remove(showquestion.getSelectedIndex());
+        showquestion.setModel(question); 
+            
+        } catch (Exception e) {
+             showquestion.setModel(question); 
+        }
+      
+    }//GEN-LAST:event_REMOVEquestionActionPerformed
+
+    private void AddQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddQuestionActionPerformed
+        // TODO add your handling code here:
+       ques.add(setQuestion.getText());
+         question.addElement(setQuestion.getText());
+          showquestion.setModel(question); 
+    }//GEN-LAST:event_AddQuestionActionPerformed
+
+    private void setQuestion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setQuestion1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_setQuestion1ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void CorrectAnswer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorrectAnswer1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CorrectAnswer1ActionPerformed
+
+    private void setduration1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setduration1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_setduration1ActionPerformed
+
+    private void Submit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Submit1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Submit1ActionPerformed
+
+    private void Submit5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Submit5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Submit5ActionPerformed
+
+    private void AddQuestion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddQuestion1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AddQuestion1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -627,11 +726,14 @@ public class LecturerForm extends javax.swing.JFrame {
 //    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private java.awt.Button AddQuestion;
+    private java.awt.Button AddQuestion1;
     private javax.swing.JTextField CorrectAnswer;
+    private javax.swing.JTextField CorrectAnswer1;
+    private java.awt.Button REMOVEquestion;
     private java.awt.Button Submit;
     private java.awt.Button Submit1;
-    private java.awt.Button Submit2;
-    private java.awt.Button Submit3;
+    private java.awt.Button Submit5;
     private javax.swing.JLabel helloMessege;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -660,6 +762,8 @@ public class LecturerForm extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTextField jTextField10;
@@ -667,12 +771,11 @@ public class LecturerForm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField12;
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField setQuestion;
+    private javax.swing.JTextField setQuestion1;
     private javax.swing.JTextField setduration;
-    private javax.swing.JTextField showquestion;
+    private javax.swing.JTextField setduration1;
+    public javax.swing.JList<String> showquestion;
+    public javax.swing.JList<String> showquestion1;
     // End of variables declaration//GEN-END:variables
 }
