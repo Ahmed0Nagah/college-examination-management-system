@@ -8,12 +8,8 @@ public class Lecturer extends UserModule.User{
         super(name, password);
         id++;
     }
-    
-    protected void setID(int id) {
-        Lecturer.id = id;
-        System.out.println("Hello");
-    }
 
+    @Override
     public int getID() {
         return id;
     }    
