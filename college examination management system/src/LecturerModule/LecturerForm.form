@@ -27,7 +27,7 @@
           <Group type="102" attributes="0">
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
               <Component id="helloMessege" min="-2" pref="187" max="-2" attributes="0"/>
-              <EmptySpace pref="103" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="jButton3" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jButton4" min="-2" max="-2" attributes="0"/>
@@ -105,11 +105,11 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel2" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
-                                  <Component id="jLabel3" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                                   <Component id="jLabel1" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
                                   <Component id="jLabel4" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
+                                  <Component id="jLabel3" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="200" max="32767" attributes="0"/>
+                              <EmptySpace pref="186" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                   <Component id="setQuestion" max="32767" attributes="0"/>
                                   <Component id="jComboBox1" pref="164" max="32767" attributes="0"/>
@@ -171,7 +171,7 @@
                                   <Component id="REMOVEquestion" min="-2" max="-2" attributes="0"/>
                                   <Component id="AddQuestion" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="12" max="32767" attributes="0"/>
+                              <EmptySpace pref="28" max="32767" attributes="0"/>
                               <Component id="Submit" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -245,9 +245,6 @@
                         </Property>
                         <Property name="label" type="java.lang.String" value="submit"/>
                       </Properties>
-                      <AccessibilityProperties>
-                        <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="submit"/>
-                      </AccessibilityProperties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="SubmitActionPerformed"/>
                       </Events>
@@ -262,13 +259,7 @@
                         <Component class="javax.swing.JList" name="showquestion">
                           <Properties>
                             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                              <StringArray count="5">
-                                <StringItem index="0" value="Item 1"/>
-                                <StringItem index="1" value="Item 2"/>
-                                <StringItem index="2" value="Item 3"/>
-                                <StringItem index="3" value="Item 4"/>
-                                <StringItem index="4" value="Item 5"/>
-                              </StringArray>
+                              <StringArray count="0"/>
                             </Property>
                           </Properties>
                           <AuxValues>
@@ -359,11 +350,11 @@
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel5" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
-                                      <Component id="jLabel7" alignment="0" min="-2" pref="90" max="-2" attributes="0"/>
                                       <Component id="jLabel6" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
                                       <Component id="jLabel8" alignment="0" min="-2" pref="66" max="-2" attributes="0"/>
+                                      <Component id="jLabel7" alignment="0" min="-2" pref="114" max="-2" attributes="0"/>
                                   </Group>
-                                  <EmptySpace pref="188" max="32767" attributes="0"/>
+                                  <EmptySpace pref="164" max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="setQuestion1" alignment="1" max="32767" attributes="0"/>
                                       <Component id="jComboBox2" alignment="1" pref="164" max="32767" attributes="0"/>
@@ -513,13 +504,7 @@
                             <Component class="javax.swing.JList" name="showquestion1">
                               <Properties>
                                 <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
-                                  <StringArray count="5">
-                                    <StringItem index="0" value="Item 1"/>
-                                    <StringItem index="1" value="Item 2"/>
-                                    <StringItem index="2" value="Item 3"/>
-                                    <StringItem index="3" value="Item 4"/>
-                                    <StringItem index="4" value="Item 5"/>
-                                  </StringArray>
+                                  <StringArray count="0"/>
                                 </Property>
                               </Properties>
                               <AuxValues>
