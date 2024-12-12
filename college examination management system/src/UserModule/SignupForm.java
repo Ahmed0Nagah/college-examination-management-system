@@ -4,15 +4,25 @@
  */
 package UserModule;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.*;
+import LecturerModule.Lecturer;
+
 /**
  *
  * @author Ahmed Nagah
  */
 public class SignupForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SignupForm
-     */
+    ArrayList<Lecturer> lecturers = new ArrayList<>();
+    
+    
     public SignupForm() {
         initComponents();
     }
@@ -30,7 +40,7 @@ public class SignupForm extends javax.swing.JFrame {
         usernameField = new javax.swing.JTextField();
         usernameLabel = new javax.swing.JLabel();
         passwordLabel = new javax.swing.JLabel();
-        loginButton = new javax.swing.JButton();
+        signupButton = new javax.swing.JButton();
         passwordField1 = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -50,12 +60,12 @@ public class SignupForm extends javax.swing.JFrame {
         passwordLabel.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         passwordLabel.setText("Password");
 
-        loginButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        loginButton.setText("Submit");
-        loginButton.setFocusable(false);
-        loginButton.addActionListener(new java.awt.event.ActionListener() {
+        signupButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        signupButton.setText("Submit");
+        signupButton.setFocusable(false);
+        signupButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginButtonActionPerformed(evt);
+                signupButtonActionPerformed(evt);
             }
         });
 
@@ -71,7 +81,7 @@ public class SignupForm extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(67, 67, 67)
-                        .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(signupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,18 +108,31 @@ public class SignupForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(passwordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(loginButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(signupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 24, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
+    private void signupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupButtonActionPerformed
         // TODO add your handling code here:
-        
 
-    }//GEN-LAST:event_loginButtonActionPerformed
+        Lecturer lecturer = new Lecturer(usernameField.getText(), passwordField1.getText());
+        lecturers.add(lecturer);
+
+
+        String[] newLecturer = {String.valueOf(lecturer.getID()),usernameField.getText(),passwordField1.getText()}; 
+        String newLine = String.join(" ", newLecturer);
+        
+        try(PrintWriter write = new PrintWriter(new FileWriter("src\\Lecturers.txt",true))) {
+            write.println(newLine);
+            
+        }catch(IOException e){
+            System.out.println("File not found!");
+        }
+
+    }//GEN-LAST:event_signupButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -147,10 +170,10 @@ public class SignupForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField passwordField1;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel sign_inLabel;
+    private javax.swing.JButton signupButton;
     private javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
