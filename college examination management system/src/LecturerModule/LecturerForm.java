@@ -16,7 +16,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import java.util.ArrayList;
+import java.util.*;
 import javax.swing.DefaultListModel;
 
 
@@ -26,16 +26,20 @@ public class LecturerForm extends javax.swing.JFrame {
     DefaultListModel<String>question=new   DefaultListModel <>();  
 
     
-    Exam examm=new Exam ();
+    ArrayList< Exam > exams=new ArrayList<>();
+   
+    
+    
     
   
     ArrayList<String> ques=new ArrayList<>();
     ArrayList<String> correct=new ArrayList<>();
     ArrayList<String> duration=new ArrayList<>();
-    
+   
     
     public LecturerForm(Lecturer lecturer) {
         initComponents();
+         showquestion.setModel(question); 
         helloMessege.setText("Hello, "+lecturer.getName());
         
    
@@ -592,7 +596,7 @@ public class LecturerForm extends javax.swing.JFrame {
 
     private void CorrectAnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorrectAnswerActionPerformed
         // TODO add your handling code here:
-           correct.add(CorrectAnswer.getText());
+       
    
     }//GEN-LAST:event_CorrectAnswerActionPerformed
 
@@ -605,10 +609,23 @@ public class LecturerForm extends javax.swing.JFrame {
        /*
         question.addElement(setQuestion.getText());
         */
-         examm.setDuration(setduration.getText());
-         examm.setQuestions(ques);
-         examm.setCorrectAnswers(correct);
-         
+       Exam exam=new Exam(setduration.getText(),ques,correct);
+       
+       exams.add(exam);
+       
+       /* 
+       exam.setDuration(setduration.getText());
+         exam.setQuestions(ques);
+         exam.setCorrectAnswers(correct);
+         */
+       
+       
+       for(Exam Exam:exams){
+        System.out.println(Exam);
+        
+        
+       }
+       
     }//GEN-LAST:event_SubmitActionPerformed
 
     private void setQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setQuestionActionPerformed
@@ -642,8 +659,9 @@ public class LecturerForm extends javax.swing.JFrame {
     private void AddQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddQuestionActionPerformed
         // TODO add your handling code here:
        ques.add(setQuestion.getText());
+       correct.add(CorrectAnswer.getText());
          question.addElement(setQuestion.getText());
-          showquestion.setModel(question); 
+         /* showquestion.setModel(question);*/ 
     }//GEN-LAST:event_AddQuestionActionPerformed
 
     private void setQuestion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setQuestion1ActionPerformed

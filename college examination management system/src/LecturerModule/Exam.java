@@ -1,14 +1,16 @@
 package LecturerModule;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Exam {
     private ArrayList<String> questions;
     private String duration;
     private ArrayList<String> correctAnswers;
 
-    public Exam() {
-        
+    public Exam(String duration,ArrayList<String> questions, ArrayList<String> correctAnswers ) {
+           this.duration=duration ;
+         this.correctAnswers.addAll(correctAnswers);
+           this.questions.addAll(questions);
     }
 
     public void setCorrectAnswers(ArrayList<String> correctAnswers) {
@@ -35,6 +37,12 @@ public class Exam {
      
         return questions ;
     }
+
+    @Override
+    public String toString() {
+        
+return "duration: "+getDuration()+"question"+getQuestions()+"correct"+getCorrectAnswers();
+    }
     
-    
+ 
 }
