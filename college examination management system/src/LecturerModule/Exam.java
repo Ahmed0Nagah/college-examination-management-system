@@ -44,8 +44,7 @@ public class Exam {
 
     @Override
     public String toString() {
-        
-return "Course name : "+this.courseName+"duration: "+getDuration()+" questions: "+getQuestions()+" correct answers: "+getCorrectAnswers();
+        return "Course name : "+this.courseName+" duration: "+getDuration()+" questions: "+getQuestions()+" correct answers: "+getCorrectAnswers();
     }
     
  
