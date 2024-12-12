@@ -9,6 +9,6 @@ package StudentModule;
  * @author Ahmed Nagah
  */
 public class Student {
-    int std_age = 18;
+    int std_age = 25;
     
 }
