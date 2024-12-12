@@ -3,14 +3,18 @@ package LecturerModule;
 import java.util.*;
 
 public class Exam {
-    private ArrayList<String> questions;
+    private ArrayList<String> questions = new ArrayList<>();
     private String duration;
-    private ArrayList<String> correctAnswers;
+    private ArrayList<String> correctAnswers = new ArrayList<>();
+    private String courseName;
 
-    public Exam(String duration,ArrayList<String> questions, ArrayList<String> correctAnswers ) {
-           this.duration=duration ;
-         this.correctAnswers.addAll(correctAnswers);
-           this.questions.addAll(questions);
+    public Exam(String duration,ArrayList<String> questions, ArrayList<String> correctAnswers,
+                String courseName) {
+        
+        this.correctAnswers.addAll(correctAnswers);
+        this.questions.addAll(questions);
+        this.duration = duration;
+        this.courseName = courseName;
     }
 
     public void setCorrectAnswers(ArrayList<String> correctAnswers) {
@@ -41,7 +45,7 @@ public class Exam {
     @Override
     public String toString() {
         
-return "duration: "+getDuration()+"question"+getQuestions()+"correct"+getCorrectAnswers();
+return "Course name : "+this.courseName+"duration: "+getDuration()+" questions: "+getQuestions()+" correct answers: "+getCorrectAnswers();
     }
     
  
