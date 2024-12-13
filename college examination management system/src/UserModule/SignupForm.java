@@ -13,6 +13,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.*;
 import LecturerModule.Lecturer;
+import StudentModule.*;
 
 /**
  *
@@ -21,10 +22,12 @@ import LecturerModule.Lecturer;
 public class SignupForm extends javax.swing.JFrame {
 
     ArrayList<Lecturer> lecturers = new ArrayList<>();
+    private int signUpType;
     
-    
-    public SignupForm() {
+    public SignupForm(int signUpType) {
         initComponents();
+        
+        this.signUpType = signUpType;
     }
 
     /**
@@ -42,6 +45,7 @@ public class SignupForm extends javax.swing.JFrame {
         passwordLabel = new javax.swing.JLabel();
         signupButton = new javax.swing.JButton();
         passwordField1 = new javax.swing.JPasswordField();
+        signupButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,6 +77,15 @@ public class SignupForm extends javax.swing.JFrame {
         passwordField1.setForeground(new java.awt.Color(0, 0, 0));
         passwordField1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        signupButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        signupButton1.setText("cancel");
+        signupButton1.setFocusable(false);
+        signupButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                signupButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,15 +93,16 @@ public class SignupForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
-                        .addComponent(signupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(passwordLabel)
                             .addComponent(passwordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(usernameLabel)))
+                            .addComponent(usernameLabel)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(signupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(signupButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(68, 68, 68)
                         .addComponent(sign_inLabel)))
@@ -108,7 +122,9 @@ public class SignupForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(passwordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(signupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(signupButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(signupButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 24, Short.MAX_VALUE))
         );
 
@@ -117,63 +133,91 @@ public class SignupForm extends javax.swing.JFrame {
 
     private void signupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupButtonActionPerformed
         // TODO add your handling code here:
-
-        Lecturer lecturer = new Lecturer(usernameField.getText(), passwordField1.getText());
-        lecturers.add(lecturer);
-
-
-        String[] newLecturer = {String.valueOf(lecturer.getID()),usernameField.getText(),passwordField1.getText()}; 
-        String newLine = String.join(" ", newLecturer);
-        
-        try(PrintWriter write = new PrintWriter(new FileWriter("src\\Lecturers.txt",true))) {
-            write.println(newLine);
+        if(signUpType == 1){
             
-        }catch(IOException e){
-            System.out.println("File not found!");
         }
+        
+        else if(signUpType == 2){
+            
+            /*note that you will delete this object because you will remove the automatic id*/
+            Lecturer lecturer = new Lecturer(usernameField.getText(), passwordField1.getText());
+            lecturers.add(lecturer);
+
+
+            String[] newLecturer = {String.valueOf(lecturer.getID()),usernameField.getText(),passwordField1.getText()}; 
+            String newLine = String.join(" ", newLecturer);
+
+            try(PrintWriter write = new PrintWriter(new FileWriter("src\\Lecturers.txt",true))) {
+                write.println(newLine);
+
+            }catch(IOException e){
+                System.out.println("File not found!");
+            }
+        }
+        else{
+            Student student = new Student(usernameField.getText(), passwordField1.getText());
+            
+            String[] newStudent = {String.valueOf(student.getID()),usernameField.getText(),passwordField1.getText()}; 
+            String newLine = String.join(" ", newStudent);
+
+            try(PrintWriter write = new PrintWriter(new FileWriter("src\\Students.txt",true))) {
+                write.println(newLine);
+
+            }catch(IOException e){
+                System.out.println("File not found!");
+            }
+        }
+        
+        dispose();
 
     }//GEN-LAST:event_signupButtonActionPerformed
+
+    private void signupButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupButton1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_signupButton1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(SignupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(SignupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(SignupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(SignupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new SignupForm().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(SignupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(SignupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(SignupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(SignupForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new SignupForm().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField passwordField1;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel sign_inLabel;
     private javax.swing.JButton signupButton;
+    private javax.swing.JButton signupButton1;
     private javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables
