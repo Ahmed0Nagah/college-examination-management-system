@@ -1,13 +1,12 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package LecturerModule;
 
 import UserModule.MainMenu;
 import UserModule.UpdateForm;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.io.File;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.swing.JButton;
@@ -19,6 +18,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import java.util.*;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 
 public class LecturerForm extends javax.swing.JFrame {
@@ -48,6 +48,31 @@ public class LecturerForm extends javax.swing.JFrame {
         questionsList.setModel(modifyExamQuestions);
         
         helloMessege.setText("Hello, "+lecturer.getName());
+        
+//        try(Scanner fileReader = new Scanner(new File("src\\exams.txt"))){
+//            while(fileReader.hasNext()){
+//                String line = fileReader.nextLine();
+//                String [] arr = line.split(" ");
+//                examsModel.addElement(arr[0]);
+//                ArrayList<String> currentQuestions = new ArrayList<>();
+//                ArrayList<String> currentAnswers = new ArrayList<>();
+//                try(Scanner reader = new Scanner(new File("src\\exams.txt"))) {
+//                while(reader.hasNext()){
+//                    String Line = reader.nextLine();
+//                    String[] Arr = Line.split(" ");
+//                    
+//                    currentQuestions.add(Arr[3]);
+//                    currentAnswers.add(Arr[5]);
+//                }
+//                
+//                } catch (Exception e) {
+//                }
+//                exams.add(new Exam(arr[1],currentQuestions,currentAnswers,arr[0]));
+//            }
+            
+//        }catch(IOException e){
+//            System.out.println("File not found!\n");
+//        }
         
    
         
@@ -103,7 +128,7 @@ public class LecturerForm extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        submitButton = new javax.swing.JButton();
         reportingToolsPanel = new javax.swing.JPanel();
         automaticGradingPanel = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
@@ -340,13 +365,13 @@ public class LecturerForm extends javax.swing.JFrame {
         jButton6.setText("Remove question");
         jButton6.setPreferredSize(new java.awt.Dimension(148, 31));
 
-        jButton7.setBackground(new java.awt.Color(255, 153, 0));
-        jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton7.setForeground(new java.awt.Color(255, 255, 255));
-        jButton7.setText("Submit");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        submitButton.setBackground(new java.awt.Color(255, 153, 0));
+        submitButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        submitButton.setForeground(new java.awt.Color(255, 255, 255));
+        submitButton.setText("Submit");
+        submitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                submitButtonActionPerformed(evt);
             }
         });
 
@@ -397,7 +422,7 @@ public class LecturerForm extends javax.swing.JFrame {
                                 .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(modifyExamPanelLayout.createSequentialGroup()
                         .addGap(231, 231, 231)
-                        .addComponent(jButton7)))
+                        .addComponent(submitButton)))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
         modifyExamPanelLayout.setVerticalGroup(
@@ -432,7 +457,7 @@ public class LecturerForm extends javax.swing.JFrame {
                     .addComponent(jButton5)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButton7)
+                .addComponent(submitButton)
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -764,47 +789,89 @@ public class LecturerForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_questionsListValueChanged
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
         // TODO add your handling code here:
+        String selectedExamName = examslist.getSelectedValue();
+    
+    // Ensure an exam is selected
+    if (selectedExamName != null && !selectedExamName.isEmpty()) {
+        System.out.println("Exam selected: " + selectedExamName);  // Debugging line
         
-    }//GEN-LAST:event_jButton7ActionPerformed
+        for (Exam exam : exams) {
+            if (exam.getCourseName().equals(selectedExamName)) {
+                System.out.println("Found matching exam: " + exam.getCourseName());  // Debugging line
+                
+                // Get the modified values from the UI components
+                String newDuration = modifyDuration.getText();
+                
+                // Ensure that the question list is not empty before proceeding
+                if (!ques.isEmpty() && !correct.isEmpty() && ques.size() == correct.size()) {
+                    ArrayList<String> newQuestions = new ArrayList<>(ques);  // Use the modified list of questions
+                    ArrayList<String> newCorrectAnswers = new ArrayList<>(correct);  // Use the modified list of correct answers
+
+                    // Modify the exam
+                    exam.modifyExam(newDuration, newQuestions, newCorrectAnswers);
+
+                    // Update the UI with the modified exam
+                    modifyExamQuestions.clear();
+                    for (String question : exam.getQuestions()) {
+                        modifyExamQuestions.addElement(question);
+                    }
+
+                    // Notify the user that the exam was successfully updated
+                    JOptionPane.showMessageDialog(this, "Exam modified successfully!");
+                } else {
+                    // If the questions or correct answers are empty or mismatched
+                    JOptionPane.showMessageDialog(this, "Questions or correct answers are invalid.", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+                
+                break;
+            }
+        }
+    } else {
+        // If no exam is selected, show an error message
+        JOptionPane.showMessageDialog(this, "Please select an exam to modify.", "No Exam Selected", JOptionPane.WARNING_MESSAGE);
+    }
+
+        
+    }//GEN-LAST:event_submitButtonActionPerformed
 
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Nimbus".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(LecturerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(LecturerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(LecturerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(LecturerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//      
-//        
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new LecturerForm(new Lecturer("ahmed", "1234")).setVisible(true);
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(LecturerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(LecturerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(LecturerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(LecturerForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+      
+        
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LecturerForm(new Lecturer("ahmed", "1234")).setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button AddQuestion;
@@ -823,7 +890,6 @@ public class LecturerForm extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -865,5 +931,6 @@ public class LecturerForm extends javax.swing.JFrame {
     private javax.swing.JTextField setQuestion;
     private javax.swing.JTextField setduration;
     public javax.swing.JList<String> showquestion;
+    private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }

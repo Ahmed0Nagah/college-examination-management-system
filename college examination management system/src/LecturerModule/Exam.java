@@ -1,5 +1,8 @@
 package LecturerModule;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -68,8 +71,44 @@ public class Exam {
             System.err.println("Error saving the exam to file: " + e.getMessage());
         }
     }
-    
+    public static void modifyExamInFile(String courseName, Exam updatedExam) {
+        File file = new File("src\\exams.txt");
+        List<String> lines = new ArrayList<>();
+        boolean examModified = false;
 
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                // If the line contains the courseName, it is part of the exam we want to modify
+                if (line.contains(courseName)) {
+                    // We will add the new exam details when we find the course name
+                    lines.add(updatedExam.formatExamDetails());
+                    examModified = true;
+                } else {
+                    lines.add(line);
+                }
+            }
+
+            // If the exam was found and modified, rewrite the entire file
+            if (examModified) {
+                try (PrintWriter writer = new PrintWriter(new FileWriter(file))) {
+                    for (String updatedLine : lines) {
+                        writer.println(updatedLine);
+                    }
+                    System.out.println("Exam modified successfully.");
+                }
+            } else {
+                System.out.println("Exam not found.");
+            }
+        } catch (IOException e) {
+            System.err.println("Error modifying the exam in the file: " + e.getMessage());
+        }
+    }
+    public void modifyExam(String newDuration, ArrayList<String> newQuestions, ArrayList<String> newCorrectAnswers) {
+    this.duration = newDuration;
+    this.questions = newQuestions;
+    this.correctAnswers = newCorrectAnswers;
+    }
     @Override
     public String toString() {
         return "Course name : "+this.courseName+" duration: "+getDuration()+" questions: "+getQuestions()+" correct answers: "+getCorrectAnswers();
