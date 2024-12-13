@@ -23,8 +23,9 @@ import javax.swing.DefaultListModel;
 public class LecturerForm extends javax.swing.JFrame {
         
     
-    DefaultListModel<String>question=new   DefaultListModel <>(); 
-    DefaultListModel<Exam> examsModel = new DefaultListModel<>();
+    DefaultListModel<String>createExamQuestions=new   DefaultListModel <>(); 
+    DefaultListModel<String> examsModel = new DefaultListModel<>();
+    DefaultListModel<String> modifyExamQuestions = new DefaultListModel<>();
 
     
     ArrayList< Exam > exams=new ArrayList<>();
@@ -41,9 +42,9 @@ public class LecturerForm extends javax.swing.JFrame {
     
     public LecturerForm(Lecturer lecturer) {
         initComponents();
-        showquestion.setModel(question);
-        
-//        examslist.setModel(examsModel);
+        showquestion.setModel(createExamQuestions);
+        examslist.setModel(examsModel);
+        questionsList.setModel(modifyExamQuestions);
         
         helloMessege.setText("Hello, "+lecturer.getName());
         
@@ -87,15 +88,15 @@ public class LecturerForm extends javax.swing.JFrame {
         examslist = new javax.swing.JList<>();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        setduration1 = new javax.swing.JTextField();
+        modifyDuration = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        setQuestion1 = new javax.swing.JTextField();
-        setCourseName1 = new javax.swing.JTextField();
+        modifyQuestion = new javax.swing.JTextField();
+        modifyCourseName = new javax.swing.JTextField();
         jComboBox2 = new javax.swing.JComboBox<>();
-        CorrectAnswer1 = new javax.swing.JTextField();
+        modifyCorrectAnswer = new javax.swing.JTextField();
         jScrollPane3 = new javax.swing.JScrollPane();
         questionsList = new javax.swing.JList<>();
         jLabel20 = new javax.swing.JLabel();
@@ -272,6 +273,11 @@ public class LecturerForm extends javax.swing.JFrame {
         ExamTabs.addTab("Create exam", createExamPanel);
 
         examslist.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        examslist.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                examslistValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(examslist);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -279,9 +285,9 @@ public class LecturerForm extends javax.swing.JFrame {
 
         jLabel6.setText("Duration :");
 
-        setduration1.addActionListener(new java.awt.event.ActionListener() {
+        modifyDuration.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setduration1ActionPerformed(evt);
+                modifyDurationActionPerformed(evt);
             }
         });
 
@@ -293,9 +299,9 @@ public class LecturerForm extends javax.swing.JFrame {
 
         jLabel18.setText("Course name : ");
 
-        setQuestion1.addActionListener(new java.awt.event.ActionListener() {
+        modifyQuestion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                setQuestion1ActionPerformed(evt);
+                modifyQuestionActionPerformed(evt);
             }
         });
 
@@ -306,12 +312,17 @@ public class LecturerForm extends javax.swing.JFrame {
             }
         });
 
-        CorrectAnswer1.addActionListener(new java.awt.event.ActionListener() {
+        modifyCorrectAnswer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CorrectAnswer1ActionPerformed(evt);
+                modifyCorrectAnswerActionPerformed(evt);
             }
         });
 
+        questionsList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                questionsListValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(questionsList);
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -352,8 +363,8 @@ public class LecturerForm extends javax.swing.JFrame {
                                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(setduration1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(setCourseName1, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                            .addComponent(modifyDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(modifyCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(modifyExamPanelLayout.createSequentialGroup()
                                         .addGap(50, 50, 50)
                                         .addComponent(jButton5)))
@@ -362,7 +373,7 @@ public class LecturerForm extends javax.swing.JFrame {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modifyExamPanelLayout.createSequentialGroup()
                                         .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(setQuestion1))
+                                        .addComponent(modifyQuestion))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -370,7 +381,7 @@ public class LecturerForm extends javax.swing.JFrame {
                                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(CorrectAnswer1)
+                                            .addComponent(modifyCorrectAnswer)
                                             .addGroup(modifyExamPanelLayout.createSequentialGroup()
                                                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(0, 0, Short.MAX_VALUE))))))
@@ -397,15 +408,15 @@ public class LecturerForm extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(setCourseName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(modifyCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
-                    .addComponent(setQuestion1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(modifyQuestion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(setduration1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(modifyDuration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel16)
-                    .addComponent(CorrectAnswer1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(modifyCorrectAnswer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
@@ -629,8 +640,12 @@ public class LecturerForm extends javax.swing.JFrame {
         question.addElement(setQuestion.getText());
         */
        Exam exam=new Exam(setduration.getText(),ques,correct,setCourseName.getText());
+       
        exams.add(exam);
-       question.clear();
+       examsModel.addElement(setCourseName.getText());
+       
+       
+       createExamQuestions.clear();
        ques.clear();
        correct.clear();
        
@@ -640,10 +655,11 @@ public class LecturerForm extends javax.swing.JFrame {
        setCourseName.setText("");
        
        
-       examsModel.addElement(exam);
-//       for(Exam Exam : exams){
-//           System.out.println(Exam.toString());
-//       }
+       
+       
+       for(Exam Exam : exams){
+           System.out.println(Exam.toString());
+       }
  
        
     }//GEN-LAST:event_SubmitActionPerformed
@@ -666,7 +682,7 @@ public class LecturerForm extends javax.swing.JFrame {
     private void REMOVEquestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_REMOVEquestionActionPerformed
         // TODO add your handling code here:
         try {  
-        question.remove(showquestion.getSelectedIndex());
+        createExamQuestions.remove(showquestion.getSelectedIndex());
         ques.remove(showquestion.getSelectedIndex());
         correct.remove(showquestion.getSelectedIndex());
          
@@ -681,28 +697,66 @@ public class LecturerForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         ques.add(setQuestion.getText());
         correct.add(CorrectAnswer.getText());
-        question.addElement(setQuestion.getText());
+        createExamQuestions.addElement(setQuestion.getText());
         
         setQuestion.setText("");
         CorrectAnswer.setText("");
-         /* showquestion.setModel(question);*/ 
+          
     }//GEN-LAST:event_AddQuestionActionPerformed
 
-    private void setduration1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setduration1ActionPerformed
+    private void modifyDurationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyDurationActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_setduration1ActionPerformed
+    }//GEN-LAST:event_modifyDurationActionPerformed
 
-    private void setQuestion1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setQuestion1ActionPerformed
+    private void modifyQuestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyQuestionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_setQuestion1ActionPerformed
+    }//GEN-LAST:event_modifyQuestionActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
-    private void CorrectAnswer1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CorrectAnswer1ActionPerformed
+    private void modifyCorrectAnswerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyCorrectAnswerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_CorrectAnswer1ActionPerformed
+    }//GEN-LAST:event_modifyCorrectAnswerActionPerformed
+
+    private void examslistValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_examslistValueChanged
+        // TODO add your handling code here:
+        
+        String selectedExamName = examslist.getSelectedValue();
+        
+        if(selectedExamName != null){
+            for(Exam exam : exams){
+                if(exam.getCourseName().equals(selectedExamName)){
+                    modifyExamQuestions.clear();
+                    for(String question : exam.getQuestions()){
+                        modifyExamQuestions.addElement(question);
+                    }
+                }
+            }
+        }
+        
+    }//GEN-LAST:event_examslistValueChanged
+
+    private void questionsListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_questionsListValueChanged
+        // TODO add your handling code here:
+        String selectedExamName = examslist.getSelectedValue();
+        
+        for(Exam exam : exams){
+                if(exam.getCourseName().equals(selectedExamName)){
+                    modifyCourseName.setText(exam.getCourseName());
+                    modifyDuration.setText(exam.getDuration());
+                    
+                    int selectedIndex = questionsList.getSelectedIndex();
+                    
+                    modifyCorrectAnswer.setText(exam.getCorrectAnswers().get(selectedIndex));
+                }
+            }
+        
+        
+        modifyQuestion.setText(questionsList.getSelectedValue());
+        
+    }//GEN-LAST:event_questionsListValueChanged
 
     /**
      * @param args the command line arguments
@@ -744,7 +798,6 @@ public class LecturerForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Button AddQuestion;
     private javax.swing.JTextField CorrectAnswer;
-    private javax.swing.JTextField CorrectAnswer1;
     private javax.swing.JTabbedPane ExamTabs;
     private java.awt.Button REMOVEquestion;
     private java.awt.Button Submit;
@@ -790,15 +843,16 @@ public class LecturerForm extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField14;
     private javax.swing.JTextField jTextField15;
     private javax.swing.JTabbedPane mainTabs;
+    private javax.swing.JTextField modifyCorrectAnswer;
+    private javax.swing.JTextField modifyCourseName;
+    private javax.swing.JTextField modifyDuration;
     private javax.swing.JPanel modifyExamPanel;
+    private javax.swing.JTextField modifyQuestion;
     private javax.swing.JList<String> questionsList;
     private javax.swing.JPanel reportingToolsPanel;
     private javax.swing.JTextField setCourseName;
-    private javax.swing.JTextField setCourseName1;
     private javax.swing.JTextField setQuestion;
-    private javax.swing.JTextField setQuestion1;
     private javax.swing.JTextField setduration;
-    private javax.swing.JTextField setduration1;
     public javax.swing.JList<String> showquestion;
     // End of variables declaration//GEN-END:variables
 }

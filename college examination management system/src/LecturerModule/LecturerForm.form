@@ -351,8 +351,8 @@
                                                       </Group>
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="setduration1" min="-2" pref="51" max="-2" attributes="0"/>
-                                                          <Component id="setCourseName1" min="-2" pref="55" max="-2" attributes="0"/>
+                                                          <Component id="modifyDuration" min="-2" pref="51" max="-2" attributes="0"/>
+                                                          <Component id="modifyCourseName" min="-2" pref="55" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
                                                   <Group type="102" alignment="0" attributes="0">
@@ -365,7 +365,7 @@
                                                   <Group type="102" alignment="1" attributes="0">
                                                       <Component id="jLabel7" min="-2" pref="66" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="setQuestion1" max="32767" attributes="0"/>
+                                                      <Component id="modifyQuestion" max="32767" attributes="0"/>
                                                   </Group>
                                                   <Group type="103" alignment="1" groupAlignment="0" attributes="0">
                                                       <Component id="jLabel20" min="-2" pref="81" max="-2" attributes="0"/>
@@ -375,7 +375,7 @@
                                                       <Component id="jLabel16" min="-2" pref="101" max="-2" attributes="0"/>
                                                       <EmptySpace max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="0" attributes="0">
-                                                          <Component id="CorrectAnswer1" max="32767" attributes="0"/>
+                                                          <Component id="modifyCorrectAnswer" max="32767" attributes="0"/>
                                                           <Group type="102" attributes="0">
                                                               <Component id="jButton6" min="-2" pref="158" max="-2" attributes="0"/>
                                                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -416,16 +416,16 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="setCourseName1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="modifyCourseName" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="setQuestion1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="modifyQuestion" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="setduration1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="modifyDuration" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="CorrectAnswer1" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="modifyCorrectAnswer" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -458,6 +458,9 @@
                               <Font name="Segoe UI" size="14" style="0"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="examslistValueChanged"/>
+                          </Events>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                           </AuxValues>
@@ -477,9 +480,9 @@
                         <Property name="text" type="java.lang.String" value="Duration :"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="setduration1">
+                    <Component class="javax.swing.JTextField" name="modifyDuration">
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setduration1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modifyDurationActionPerformed"/>
                       </Events>
                     </Component>
                     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -502,12 +505,12 @@
                         <Property name="text" type="java.lang.String" value="Course name : "/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="setQuestion1">
+                    <Component class="javax.swing.JTextField" name="modifyQuestion">
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setQuestion1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modifyQuestionActionPerformed"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="setCourseName1">
+                    <Component class="javax.swing.JTextField" name="modifyCourseName">
                     </Component>
                     <Component class="javax.swing.JComboBox" name="jComboBox2">
                       <Properties>
@@ -526,9 +529,9 @@
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="CorrectAnswer1">
+                    <Component class="javax.swing.JTextField" name="modifyCorrectAnswer">
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CorrectAnswer1ActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="modifyCorrectAnswerActionPerformed"/>
                       </Events>
                     </Component>
                     <Container class="javax.swing.JScrollPane" name="jScrollPane3">
@@ -544,6 +547,9 @@
                               <StringArray count="0"/>
                             </Property>
                           </Properties>
+                          <Events>
+                            <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="questionsListValueChanged"/>
+                          </Events>
                           <AuxValues>
                             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                           </AuxValues>

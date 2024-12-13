@@ -42,6 +42,11 @@ public class Exam {
         return questions ;
     }
 
+    public String getCourseName() {
+        return courseName;
+    }
+    
+
     @Override
     public String toString() {
         return "Course name : "+this.courseName+" duration: "+getDuration()+" questions: "+getQuestions()+" correct answers: "+getCorrectAnswers();
