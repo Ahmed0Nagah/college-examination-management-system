@@ -8,6 +8,7 @@ import UserModule.MainMenu;
 import UserModule.UpdateForm;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -343,6 +344,11 @@ public class LecturerForm extends javax.swing.JFrame {
         jButton7.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton7.setForeground(new java.awt.Color(255, 255, 255));
         jButton7.setText("Submit");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout modifyExamPanelLayout = new javax.swing.GroupLayout(modifyExamPanel);
         modifyExamPanel.setLayout(modifyExamPanelLayout);
@@ -758,6 +764,11 @@ public class LecturerForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_questionsListValueChanged
 
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -790,7 +801,7 @@ public class LecturerForm extends javax.swing.JFrame {
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new LecturerForm().setVisible(true);
+//                new LecturerForm(new Lecturer("ahmed", "1234")).setVisible(true);
 //            }
 //        });
 //    }
