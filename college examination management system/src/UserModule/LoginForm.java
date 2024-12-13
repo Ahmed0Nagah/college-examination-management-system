@@ -24,21 +24,6 @@ public class LoginForm extends javax.swing.JFrame {
         getRootPane().setDefaultButton(loginButton);
     }
     
-    public String getname(){
-        String name = usernameField.getText();
-        return name;
-    }
-    public String getPassword(){
-        String password = passwordField.getText();
-        return password;
-    }
-
-    
-
-    
-    
-    
-    
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -248,8 +233,8 @@ public class LoginForm extends javax.swing.JFrame {
 //            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
-//
-//        /* Create and display the form */
+        
+        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
 //                new LoginForm(0).setVisible(true);
