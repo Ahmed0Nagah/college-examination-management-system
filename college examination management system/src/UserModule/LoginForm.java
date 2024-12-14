@@ -187,7 +187,7 @@ public class LoginForm extends javax.swing.JFrame {
                     if(content[1].equals(userName) && content[2].equals(password)){
                         dispose();
                         /*just for test*/
-                        new ChooseSubject().setVisible(true);//here will be the student form
+                        new StudentModule.ChooseSubject().setVisible(true);//here will be the student form
                     }
                 }
                 errorJLabel.setVisible(true);
