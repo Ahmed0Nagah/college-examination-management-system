@@ -135,11 +135,9 @@ public void EnterExam( String course ) {
 								} else {
 									System.out.println(exam);
 									String[] examInfo = exam.split(",");
-									System.out.println("Exam name : " + examInfo[examInfo.length-4] );
-									System.out.println("Subject : " + examInfo[examInfo.length-3] );
-									System.out.println("Number of questions : " + examInfo[examInfo.length-2] );
-									System.out.println("Exam duration : " + examInfo[examInfo.length-1] );
-									System.out.println ("===================================================================================================================" );
+									System.out.println("Exam name : " + examInfo[examInfo.length-2] );
+									System.out.println("Subject : " + examInfo[examInfo.length-1] );
+                                                                        System.out.println ("===================================================================================================================" );
 									for(int index = 0 ; index < examInfo.length-4 ; index++)
 									{
 										System.out.println((index+1) + ") " +examInfo[index] );
