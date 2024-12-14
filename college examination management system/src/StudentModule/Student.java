@@ -8,7 +8,7 @@ public class Student extends UserModule.User{
     
     private static int id = 100;
 
-    Student ( String name , String password) {
+    public Student ( String name , String password) {
 	super ( name , password);
 	id++;
     }
