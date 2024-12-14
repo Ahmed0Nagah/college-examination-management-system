@@ -233,11 +233,11 @@ public class LoginForm extends javax.swing.JFrame {
 //            java.util.logging.Logger.getLogger(LoginForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
-        
-        /* Create and display the form */
+//        
+//        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new LoginForm(0).setVisible(true);
+//                new LoginForm(2).setVisible(true);
 //                
 //            }
 //        });

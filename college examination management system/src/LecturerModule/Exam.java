@@ -21,7 +21,6 @@ public class Exam {
         this.questions.addAll(questions);
         this.duration = duration;
         this.courseName = courseName;
-        saveToFile();
     }
 
     public void setCorrectAnswers(ArrayList<String> correctAnswers) {
@@ -55,18 +54,47 @@ public class Exam {
     private String formatExamDetails() {
         StringBuilder sb = new StringBuilder();
         sb.append(courseName).append(" ").append(duration).append(" ");
-        for (int i = 0; i < questions.size(); i++) {
-            sb.append(i + 1).append(". ").append(questions.get(i)).append(" ");
-        }
         
-        for (int i = 0; i < correctAnswers.size(); i++) {
-            sb.append(i + 1).append(". ").append(correctAnswers.get(i)).append(" ");
+        return sb.toString();
+    }
+    private String formatQuestions(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(courseName).append(" ");
+        
+        for (int i = 0; i < questions.size(); i++) {
+            sb.append(questions.get(i)).append(" ");
         }
         return sb.toString();
     }
-    private void saveToFile() {
+    private String formatAnswers(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(courseName).append(" ");
+        
+        for (int i = 0; i < correctAnswers.size(); i++) {
+            sb.append(correctAnswers.get(i)).append(" ");
+        }
+        return sb.toString();
+    }
+    
+        
+        
+    public void saveToFile() {
+        
         try (PrintWriter write = new PrintWriter(new FileWriter("src\\exams.txt",true))) {
             write.println(formatExamDetails());
+        } catch (IOException e) {
+            System.err.println("Error saving the exam to file: " + e.getMessage());
+        }
+        
+        try (PrintWriter write = new PrintWriter(new FileWriter("src\\questions.txt",true))) {
+            write.println(formatQuestions());
+        } catch (IOException e) {
+            System.err.println("Error saving the exam to file: " + e.getMessage());
+        }
+        
+        
+        try (PrintWriter write = new PrintWriter(new FileWriter("src\\correctAnswers.txt",true))) {
+            write.println(formatAnswers());
         } catch (IOException e) {
             System.err.println("Error saving the exam to file: " + e.getMessage());
         }
@@ -108,6 +136,26 @@ public class Exam {
     this.duration = newDuration;
     this.questions = newQuestions;
     this.correctAnswers = newCorrectAnswers;
+    }
+    public int gradeExam(ArrayList<String> studentAnswers) {
+        int score = 0;
+        for (int i = 0; i < studentAnswers.size(); i++) {
+            // Compare the student's answer with the correct answer
+            if (studentAnswers.get(i).equals(correctAnswers.get(i))) {
+                // The answer is correct
+                System.out.println("Question " + (i + 1) + ": Correct");
+                score++;
+            } else {
+                // The answer is incorrect
+                System.out.println("Question " + (i + 1) + ": Incorrect");
+            }
+        }
+//        try (FileWriter writer = new FileWriter("src\\student_grade.txt")) {
+//            writer.write("Student score: " + score + " out of " + correctAnswers.size());
+//        } catch (IOException e) {
+//            System.err.println("Error writing the grade to file: " + e.getMessage());
+//        }
+        return score;
     }
     @Override
     public String toString() {

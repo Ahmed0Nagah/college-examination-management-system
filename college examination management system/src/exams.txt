@@ -1,5 +1,3 @@
-CS 30 1. hi? 1. lol 
-SA 30 1. hi 1. lol 
-hell 30 1. hi 1. CS 
-DC 30 1. hi? 1. lol 
-er 23 1. VR 1. lol  
+CS 30 
+SA 20 
+DS 10 
