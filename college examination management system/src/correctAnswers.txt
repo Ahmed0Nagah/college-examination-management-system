@@ -1,3 +1,2 @@
-CS ahmed 
-SA lol ji 
-DS as 
+CS_Exam,CS,2,10,7,
+DS_Exam,DS,pop,push,dequeue,
