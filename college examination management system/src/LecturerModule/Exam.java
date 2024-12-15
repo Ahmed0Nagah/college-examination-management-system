@@ -99,6 +99,18 @@ public class Exam {
             System.err.println("Error saving the exam to file: " + e.getMessage());
         }
     }
+    public void modifyToFile(){
+        try (PrintWriter write = new PrintWriter(new FileWriter("src\\questions.txt"))) {
+            write.println(formatQuestions());
+        } catch (IOException e) {
+            System.err.println("Error saving the exam to file: " + e.getMessage());
+        }
+        try (PrintWriter write = new PrintWriter(new FileWriter("src\\correctAnswers.txt"))) {
+            write.println(formatAnswers());
+        } catch (IOException e) {
+            System.err.println("Error saving the exam to file: " + e.getMessage());
+        }
+    }
     public static void modifyExamInFile(String courseName, Exam updatedExam) {
         File file = new File("src\\exams.txt");
         List<String> lines = new ArrayList<>();
@@ -156,6 +168,13 @@ public class Exam {
 //            System.err.println("Error writing the grade to file: " + e.getMessage());
 //        }
         return score;
+    }
+    
+    public void modifyquestion(String question, int index){
+        questions.set(index, question);
+    }
+    public void modifyanswer(String answer, int index){
+        correctAnswers.set(index, answer);
     }
     @Override
     public String toString() {
