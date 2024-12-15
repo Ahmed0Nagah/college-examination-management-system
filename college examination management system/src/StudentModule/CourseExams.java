@@ -132,7 +132,7 @@ public class CourseExams extends javax.swing.JFrame {
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
         dispose();
-        new ExamsGUI("src\\DS_Exam.txt").setVisible(true);        // TODO add your handling code here:
+        new ExamsGUI("src\\DS_Exam.txt","DS").setVisible(true);        // TODO add your handling code here:
     }//GEN-LAST:event_button4ActionPerformed
 
     private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
@@ -161,7 +161,7 @@ public class CourseExams extends javax.swing.JFrame {
 
     private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
         dispose();
-        new ExamsGUI("src\\CS_Exam.txt").setVisible(true);           // TODO add your handling code here:
+        new ExamsGUI("src\\CS_Exam.txt","CS").setVisible(true);           // TODO add your handling code here:
     }//GEN-LAST:event_button6ActionPerformed
 
     /**
