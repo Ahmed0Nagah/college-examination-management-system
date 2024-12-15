@@ -21,6 +21,7 @@ import javax.swing.JTextField;
 import java.util.*;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 
 public class LecturerForm extends javax.swing.JFrame {
@@ -29,6 +30,9 @@ public class LecturerForm extends javax.swing.JFrame {
     DefaultListModel<String>createExamQuestions=new   DefaultListModel <>(); 
     DefaultListModel<String> examsModel = new DefaultListModel<>();
     DefaultListModel<String> modifyExamQuestions = new DefaultListModel<>();
+    DefaultTableModel reportingModel = new DefaultTableModel();
+    
+   
 
     
     ArrayList< Exam > exams=new ArrayList<>();
@@ -50,12 +54,15 @@ public class LecturerForm extends javax.swing.JFrame {
         examslist.setModel(examsModel);
         examslist1.setModel(examsModel);
         questionsList.setModel(modifyExamQuestions);
+        reportingTable.setModel(reportingModel);
 
         helloMessege.setText("Hello, " + lecturer.getName());
         
+        
         addData();
     }    
-        
+    
+    
 
         
         
@@ -232,7 +239,7 @@ public class LecturerForm extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         reportingToolsPanel = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        reportingTable = new javax.swing.JTable();
         automaticGradingPanel = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
         examslist1 = new javax.swing.JList<>();
@@ -566,7 +573,7 @@ public class LecturerForm extends javax.swing.JFrame {
 
         mainTabs.addTab("Exam Management", examManagmentPanel);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        reportingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -574,10 +581,31 @@ public class LecturerForm extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Student name", "Student id", "Course name", "grade"
+                "Student id", "Student name", "Course name", "grade"
             }
-        ));
-        jScrollPane5.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                true, false, false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane5.setViewportView(reportingTable);
+        if (reportingTable.getColumnModel().getColumnCount() > 0) {
+            reportingTable.getColumnModel().getColumn(0).setHeaderValue("Student id");
+            reportingTable.getColumnModel().getColumn(1).setHeaderValue("Student name");
+            reportingTable.getColumnModel().getColumn(2).setHeaderValue("Course name");
+            reportingTable.getColumnModel().getColumn(3).setHeaderValue("grade");
+        }
 
         javax.swing.GroupLayout reportingToolsPanelLayout = new javax.swing.GroupLayout(reportingToolsPanel);
         reportingToolsPanel.setLayout(reportingToolsPanelLayout);
@@ -978,7 +1006,6 @@ public class LecturerForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTabbedPane mainTabs;
     private javax.swing.JTextField modifyCorrectAnswer;
     private javax.swing.JTextField modifyCourseName;
@@ -987,6 +1014,7 @@ public class LecturerForm extends javax.swing.JFrame {
     private javax.swing.JTextField modifyQuestion;
     private javax.swing.JTextField noQuestionField;
     private javax.swing.JList<String> questionsList;
+    private javax.swing.JTable reportingTable;
     private javax.swing.JPanel reportingToolsPanel;
     private javax.swing.JTextField setCourseName;
     private javax.swing.JTextField setQuestion;

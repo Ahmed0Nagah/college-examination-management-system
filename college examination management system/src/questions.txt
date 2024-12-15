@@ -1,2 +1,1 @@
-CS what-is-your-brother-name? 
-SA how-you-get-home? 
+CS what-is-your-brother-name?
