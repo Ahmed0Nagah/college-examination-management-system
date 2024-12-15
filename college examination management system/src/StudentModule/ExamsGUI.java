@@ -29,24 +29,24 @@ public class ExamsGUI extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
 public void ExamFile(String path) {
-    if(path.equals("src\\DS_Exam.txt")){
-        Q1GUI.setText("delete function in stack called .....?");
-        Q2GUI.setText("insert function in stack called .....?");
-        Q3GUI.setText("delete function in queue called .....?");
-    }
-    if(path.equals("src\\CS_Exam.txt")){
-        Q1GUI.setText("(10)2=()10?");
-        Q2GUI.setText("(4)10=()2");
-        Q3GUI.setText("(111)2=()10?");
-    }
-//    FileHandler fh = new FileHandler();
-//    String[] fileContent = fh.fileData(path); // Assume this method returns a String[]
+//    if(path.equals("src\\DS_Exam.txt")){
+//        Q1GUI.setText("delete function in stack called .....?");
+//        Q2GUI.setText("insert function in stack called .....?");
+//        Q3GUI.setText("delete function in queue called .....?");
+//    }
+//    if(path.equals("src\\CS_Exam.txt")){
+//        Q1GUI.setText("(10)2=()10?");
+//        Q2GUI.setText("(4)10=()2");
+//        Q3GUI.setText("(111)2=()10?");
+//    }
+    FileHandler fh = new FileHandler();
+    String[] fileContent = fh.fileData(path); // Assume this method returns a String[]
 //    try{
-//        if (fileContent != null) { 
-//        Q1GUI.setText(fileContent[0]);
-//        Q2GUI.setText(fileContent[1]);
-//        Q3GUI.setText(fileContent[2]);
-//        }
+        if (fileContent != null) { 
+        Q1GUI.setText(fileContent[0]);
+        Q2GUI.setText(fileContent[1]);
+        Q3GUI.setText(fileContent[2]);
+        }
 //    }
 //    catch(Exception e){
 //    javax.swing.JOptionPane.showMessageDialog(this,"Error: File does not exist or cannot be read.\nDetails: " + e.getMessage(),"File Error",javax.swing.JOptionPane.ERROR_MESSAGE);
