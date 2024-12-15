@@ -10,6 +10,8 @@ public abstract class User {
     
     private String userName;
     private String password;
+    protected boolean isLoggedIn;
+
 
     public User(String userName, String password) {
         this.userName = userName;
@@ -27,7 +29,7 @@ public abstract class User {
     }
 
     
-    private String getPassword() {
+    protected String getPassword() {
         return password;
     }
 
@@ -82,6 +84,8 @@ public abstract class User {
 
     }
     
+    
+
     
     public static void main(String[] args) {
         User user = new Lecturer("Ahmed", "1234");
