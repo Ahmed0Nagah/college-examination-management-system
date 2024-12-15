@@ -152,25 +152,25 @@ public class Exam {
     this.questions = newQuestions;
     this.correctAnswers = newCorrectAnswers;
     }
-    public int gradeExam(ArrayList<String> studentAnswers) {
+    public int[] gradeExam(ArrayList<String> studentAnswers) {
         int score = 0;
+      int []wronganswers=new int[4];
         for (int i = 0; i < studentAnswers.size(); i++) {
+            
             // Compare the student's answer with the correct answer
             if (studentAnswers.get(i).equals(correctAnswers.get(i))) {
                 // The answer is correct
-                System.out.println("Question " + (i + 1) + ": Correct");
-                score++;
+               score ++;
+                
             } else {
-                // The answer is incorrect
-                System.out.println("Question " + (i + 1) + ": Incorrect");
+                
+                wronganswers[i]= i+1;
+                
+                
             }
-        }
-//        try (FileWriter writer = new FileWriter("src\\student_grade.txt")) {
-//            writer.write("Student score: " + score + " out of " + correctAnswers.size());
-//        } catch (IOException e) {
-//            System.err.println("Error writing the grade to file: " + e.getMessage());
-//        }
-        return score;
+        } wronganswers[3] = score;
+
+        return wronganswers;
     }
     
     public void modifyquestion(String question, int index){
