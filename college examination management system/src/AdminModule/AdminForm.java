@@ -90,6 +90,11 @@ public class AdminForm extends javax.swing.JFrame {
         });
 
         addUserButton.setText("Add user");
+        addUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addUserButtonActionPerformed(evt);
+            }
+        });
 
         lectueresTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -179,6 +184,11 @@ public class AdminForm extends javax.swing.JFrame {
         // TODO add your handling code here:
         new UpdateForm(1).setVisible(true);
     }//GEN-LAST:event_UpdateUserButtonActionPerformed
+
+    private void addUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButtonActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_addUserButtonActionPerformed
 
     
     public static void main(String args[]) {
