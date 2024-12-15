@@ -6,6 +6,7 @@ import UserModule.MainMenu;
 import UserModule.UpdateForm;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.Stroke;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -39,6 +40,7 @@ public class LecturerForm extends javax.swing.JFrame {
   
     ArrayList<String> ques=new ArrayList<>();
     ArrayList<String> correct=new ArrayList<>();
+    ArrayList<String> modifiedAnswers = new ArrayList<>();
     ArrayList<String> duration=new ArrayList<>();
     String CourseName;
     
@@ -122,7 +124,9 @@ public class LecturerForm extends javax.swing.JFrame {
     private void addData(){
         ArrayList<String> questions = new ArrayList<>();
         ArrayList<String> correctAnswers = new ArrayList<>();
-
+        
+        
+        
         try (Scanner examReader = new Scanner(new File("src\\exams.txt"))) {
             while (examReader.hasNextLine()) {
                 String examLine = examReader.nextLine();
@@ -141,11 +145,12 @@ public class LecturerForm extends javax.swing.JFrame {
                         String[] question = questionLine.split(" "); // Split question into parts
 
                         // Combine parts to form the full question
-                        StringBuilder fullQuestion = new StringBuilder();
-                        for (int i = 1; i<question.length;i++) {
-                            fullQuestion.append(question[i]).append(" ");
+                        if(question[0].equals(courseName)){
+                            for (int i = 1; i<question.length;i++) {
+                                questions.add(question[i]);
+                            }
+
                         }
-                        questions.add(fullQuestion.toString().trim());
                     }
                 } catch (IOException e) {
                     System.out.println("Error reading questions file: " + e.getMessage());
@@ -158,11 +163,12 @@ public class LecturerForm extends javax.swing.JFrame {
                         String[] answer = answerLine.split(" "); // Split answer into parts
 
                         // Combine parts to form the full answer
-                        StringBuilder fullAnswer = new StringBuilder();
-                        for (int i = 1; i<answer.length;i++) {
-                            fullAnswer.append(answer[i]).append(" ");
+                        if(answer[0].equals(courseName)){
+                            for (int i = 1; i<answer.length;i++) {
+                                correctAnswers.add(answer[i]);
+                            }
+
                         }
-                        correctAnswers.add(fullAnswer.toString().trim());
                     }
                 } catch (IOException e) {
                     System.out.println("Error reading answers file: " + e.getMessage());
@@ -224,26 +230,18 @@ public class LecturerForm extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        submitButton = new javax.swing.JButton();
         reportingToolsPanel = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         automaticGradingPanel = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jTextField10 = new javax.swing.JTextField();
-        jLabel11 = new javax.swing.JLabel();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jTextField15 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         examslist1 = new javax.swing.JList<>();
-        jButton7 = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        jButton8 = new javax.swing.JButton();
+        noQuestionField = new javax.swing.JTextField();
+        gradeField = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        jLabel22 = new javax.swing.JLabel();
         helloMessege = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -398,6 +396,7 @@ public class LecturerForm extends javax.swing.JFrame {
         ExamTabs.addTab("Create exam", createExamPanel);
 
         examslist.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        examslist.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         examslist.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 examslistValueChanged(evt);
@@ -410,6 +409,7 @@ public class LecturerForm extends javax.swing.JFrame {
 
         jLabel6.setText("Duration :");
 
+        modifyDuration.setEditable(false);
         modifyDuration.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 modifyDurationActionPerformed(evt);
@@ -430,6 +430,8 @@ public class LecturerForm extends javax.swing.JFrame {
             }
         });
 
+        modifyCourseName.setEditable(false);
+
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Multiple Choice", "True/False", "Short Answer" }));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -443,6 +445,7 @@ public class LecturerForm extends javax.swing.JFrame {
             }
         });
 
+        questionsList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         questionsList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 questionsListValueChanged(evt);
@@ -457,6 +460,11 @@ public class LecturerForm extends javax.swing.JFrame {
         jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jButton5.setForeground(new java.awt.Color(255, 255, 255));
         jButton5.setText("modify Question");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         jButton6.setBackground(new java.awt.Color(255, 153, 0));
         jButton6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -464,64 +472,49 @@ public class LecturerForm extends javax.swing.JFrame {
         jButton6.setText("Remove question");
         jButton6.setPreferredSize(new java.awt.Dimension(148, 31));
 
-        submitButton.setBackground(new java.awt.Color(255, 153, 0));
-        submitButton.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        submitButton.setForeground(new java.awt.Color(255, 255, 255));
-        submitButton.setText("Submit");
-        submitButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                submitButtonActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout modifyExamPanelLayout = new javax.swing.GroupLayout(modifyExamPanel);
         modifyExamPanel.setLayout(modifyExamPanelLayout);
         modifyExamPanelLayout.setHorizontalGroup(
             modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modifyExamPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(modifyExamPanelLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(modifyExamPanelLayout.createSequentialGroup()
                                 .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(modifyExamPanelLayout.createSequentialGroup()
-                                        .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(modifyDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(modifyCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(modifyExamPanelLayout.createSequentialGroup()
-                                        .addGap(50, 50, 50)
-                                        .addComponent(jButton5)))
-                                .addGap(18, 18, 18)
-                                .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modifyExamPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(modifyQuestion))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(modifyExamPanelLayout.createSequentialGroup()
-                                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(modifyCorrectAnswer)
-                                            .addGroup(modifyExamPanelLayout.createSequentialGroup()
-                                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(0, 0, Short.MAX_VALUE))))))
-                            .addGroup(modifyExamPanelLayout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(modifyDuration, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(modifyCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(modifyExamPanelLayout.createSequentialGroup()
+                                .addGap(50, 50, 50)
+                                .addComponent(jButton5)))
+                        .addGap(18, 18, 18)
+                        .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modifyExamPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(modifyQuestion))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel20, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(modifyExamPanelLayout.createSequentialGroup()
+                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(modifyCorrectAnswer)
+                                    .addGroup(modifyExamPanelLayout.createSequentialGroup()
+                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(0, 0, Short.MAX_VALUE))))))
                     .addGroup(modifyExamPanelLayout.createSequentialGroup()
-                        .addGap(231, 231, 231)
-                        .addComponent(submitButton)))
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(39, Short.MAX_VALUE))
         );
         modifyExamPanelLayout.setVerticalGroup(
@@ -555,9 +548,7 @@ public class LecturerForm extends javax.swing.JFrame {
                 .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(submitButton)
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         ExamTabs.addTab("Modify exam", modifyExamPanel);
@@ -575,51 +566,37 @@ public class LecturerForm extends javax.swing.JFrame {
 
         mainTabs.addTab("Exam Management", examManagmentPanel);
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Student name", "Student id", "Course name", "grade"
+            }
+        ));
+        jScrollPane5.setViewportView(jTable1);
+
         javax.swing.GroupLayout reportingToolsPanelLayout = new javax.swing.GroupLayout(reportingToolsPanel);
         reportingToolsPanel.setLayout(reportingToolsPanelLayout);
         reportingToolsPanelLayout.setHorizontalGroup(
             reportingToolsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 571, Short.MAX_VALUE)
+            .addGroup(reportingToolsPanelLayout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(74, Short.MAX_VALUE))
         );
         reportingToolsPanelLayout.setVerticalGroup(
             reportingToolsPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 473, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, reportingToolsPanelLayout.createSequentialGroup()
+                .addContainerGap(12, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30))
         );
 
         mainTabs.addTab("Reporting Tool", reportingToolsPanel);
-
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel9.setText("upload student answers :");
-
-        jButton1.setText("uoload file");
-
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel10.setText("upload  correct answer :");
-
-        jButton2.setText("uoload file");
-
-        jTextField10.setEditable(false);
-
-        jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel11.setText("student grade :");
-
-        jTextField11.setEditable(false);
-
-        jTextField12.setEditable(false);
-
-        jTextField14.setEditable(false);
-
-        jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel13.setText("student degree :");
-
-        jTextField15.setEditable(false);
-
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel12.setText("correct answers :");
-
-        jLabel14.setText("student name:");
-
-        jLabel15.setText("student Id :");
 
         examslist1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         examslist1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
@@ -629,116 +606,71 @@ public class LecturerForm extends javax.swing.JFrame {
         });
         jScrollPane4.setViewportView(examslist1);
 
-        jButton7.setText("jButton7");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel19.setText("Exams");
+
+        jButton8.setText("automate grades");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                jButton8ActionPerformed(evt);
             }
         });
+
+        noQuestionField.setEditable(false);
+
+        gradeField.setEditable(false);
+
+        jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel21.setText("no.questions");
+
+        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel22.setText("The grade");
 
         javax.swing.GroupLayout automaticGradingPanelLayout = new javax.swing.GroupLayout(automaticGradingPanel);
         automaticGradingPanel.setLayout(automaticGradingPanelLayout);
         automaticGradingPanelLayout.setHorizontalGroup(
             automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, automaticGradingPanelLayout.createSequentialGroup()
-                .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(26, 26, 26))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, automaticGradingPanelLayout.createSequentialGroup()
-                        .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, automaticGradingPanelLayout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, automaticGradingPanelLayout.createSequentialGroup()
-                                .addGap(32, 32, 32)
-                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(jButton7)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, automaticGradingPanelLayout.createSequentialGroup()
-                        .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(65, 65, 65))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, automaticGradingPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57)))
-                .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(65, 65, 65))
             .addGroup(automaticGradingPanelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
                     .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel9)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                                .addGap(27, 27, 27)
-                                .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(gradeField)
+                                    .addComponent(noQuestionField)))
                             .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
         );
         automaticGradingPanelLayout.setVerticalGroup(
             automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(automaticGradingPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel19)
+                .addGap(1, 1, 1)
                 .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                        .addGap(31, 31, 31)
                         .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(20, 20, 20)
-                        .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                        .addGap(80, 80, 80)
-                        .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(44, 44, 44)
-                .addComponent(jLabel15)
-                .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(jLabel14))
-                    .addGroup(automaticGradingPanelLayout.createSequentialGroup()
+                            .addComponent(noQuestionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel21))
                         .addGap(18, 18, 18)
                         .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton7)
-                            .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
-                        .addComponent(jLabel11)
-                        .addGap(30, 30, 30)
-                        .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                                .addGap(8, 8, 8)
-                                .addComponent(jLabel13)
-                                .addGap(35, 35, 35)
-                                .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(6, 6, 6))
-                    .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jScrollPane4)
-                        .addContainerGap())))
+                            .addComponent(gradeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel22))
+                        .addGap(51, 51, 51)
+                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane4))
+                .addGap(34, 34, 34))
         );
 
         mainTabs.addTab("Automatic Grading", automaticGradingPanel);
@@ -902,9 +834,10 @@ public class LecturerForm extends javax.swing.JFrame {
         String selectedExamName = examslist.getSelectedValue();
         
         if(selectedExamName != null){
+            modifyExamQuestions.clear();
             for(Exam exam : exams){
                 if(exam.getCourseName().equals(selectedExamName)){
-                    modifyExamQuestions.clear();
+                    
                     for(String question : exam.getQuestions()){
                         modifyExamQuestions.addElement(question);
                     }
@@ -934,71 +867,39 @@ public class LecturerForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_questionsListValueChanged
 
-    private void submitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_submitButtonActionPerformed
-        // TODO add your handling code here:
-        String selectedExamName = examslist.getSelectedValue();
-    
-    // Ensure an exam is selected
-    if (selectedExamName != null && !selectedExamName.isEmpty()) {
-        System.out.println("Exam selected: " + selectedExamName);  // Debugging line
-        
-        for (Exam exam : exams) {
-            if (exam.getCourseName().equals(selectedExamName)) {
-                System.out.println("Found matching exam: " + exam.getCourseName());  // Debugging line
-                
-                // Get the modified values from the UI components
-                String newDuration = modifyDuration.getText();
-                
-                // Ensure that the question list is not empty before proceeding
-                if (!ques.isEmpty() && !correct.isEmpty() && ques.size() == correct.size()) {
-                    ArrayList<String> newQuestions = new ArrayList<>(ques);  // Use the modified list of questions
-                    ArrayList<String> newCorrectAnswers = new ArrayList<>(correct);  // Use the modified list of correct answers
-
-                    // Modify the exam
-                    exam.modifyExam(newDuration, newQuestions, newCorrectAnswers);
-
-                    // Update the UI with the modified exam
-                    modifyExamQuestions.clear();
-                    for (String question : exam.getQuestions()) {
-                        modifyExamQuestions.addElement(question);
-                    }
-
-                    // Notify the user that the exam was successfully updated
-                    JOptionPane.showMessageDialog(this, "Exam modified successfully!");
-                } else {
-                    // If the questions or correct answers are empty or mismatched
-                    JOptionPane.showMessageDialog(this, "Questions or correct answers are invalid.", "Error", JOptionPane.ERROR_MESSAGE);
-                }
-                
-                break;
-            }
-        }
-    } else {
-        // If no exam is selected, show an error message
-        JOptionPane.showMessageDialog(this, "Please select an exam to modify.", "No Exam Selected", JOptionPane.WARNING_MESSAGE);
-    }
-
-        
-    }//GEN-LAST:event_submitButtonActionPerformed
-
     private void examslist1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_examslist1ValueChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_examslist1ValueChanged
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
-        String value = examslist1.getSelectedValue();
-        ArrayList<String> studenAnswers = new ArrayList<>();
+        String question = modifyQuestion.getText();
+        String correct = modifyCorrectAnswer.getText();
         
-        studenAnswers.add("Ahmed");
         
-        studenAnswers.add("Cairo");
         for(Exam exam : exams){
-            if(exam.getCourseName().equals(value)){
-                jTextField11.setText(String.valueOf(exam.gradeExam(studenAnswers)));
+            if(examslist.getSelectedValue().equals(exam.getCourseName())){
+                exam.modifyquestion(question, questionsList.getSelectedIndex());
+                exam.modifyanswer(correct, questionsList.getSelectedIndex());
+                exam.modifyToFile();
             }
         }
-    }//GEN-LAST:event_jButton7ActionPerformed
+        
+        
+        
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        ArrayList<String> hi = new ArrayList<>();
+        hi.add("by-bus");
+        for(Exam exam : exams){
+            if(examslist1.getSelectedValue().equals(exam.getCourseName())){
+                noQuestionField.setText(String.valueOf(exam.getQuestions().size()));
+                gradeField.setText(String.valueOf(exam.gradeExam(hi)));
+            }
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1048,56 +949,48 @@ public class LecturerForm extends javax.swing.JFrame {
     private javax.swing.JPanel examManagmentPanel;
     private javax.swing.JList<String> examslist;
     private javax.swing.JList<String> examslist1;
+    private javax.swing.JTextField gradeField;
     private javax.swing.JLabel helloMessege;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
+    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTabbedPane mainTabs;
     private javax.swing.JTextField modifyCorrectAnswer;
     private javax.swing.JTextField modifyCourseName;
     private javax.swing.JTextField modifyDuration;
     private javax.swing.JPanel modifyExamPanel;
     private javax.swing.JTextField modifyQuestion;
+    private javax.swing.JTextField noQuestionField;
     private javax.swing.JList<String> questionsList;
     private javax.swing.JPanel reportingToolsPanel;
     private javax.swing.JTextField setCourseName;
     private javax.swing.JTextField setQuestion;
     private javax.swing.JTextField setduration;
     public javax.swing.JList<String> showquestion;
-    private javax.swing.JButton submitButton;
     // End of variables declaration//GEN-END:variables
 }
