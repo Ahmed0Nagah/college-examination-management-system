@@ -155,6 +155,24 @@ public class LoginForm extends javax.swing.JFrame {
         }
         
         if(loginType == 1){
+            File file = new File("src\\Admins.txt");
+            try(Scanner fileReader = new Scanner(file)){
+                while(fileReader.hasNext()){
+                    String line = fileReader.nextLine();
+                    String[] content = line.split(" ");
+
+                    if(content[1].equals(userName) && content[2].equals(password)){
+                        dispose();
+                        new AdminModule.AdminForm().setVisible(true);
+                    }
+                }
+                errorJLabel.setVisible(true);
+            }
+            catch (Exception e){
+                System.out.println("File not found!");
+                errorJLabel.setText("An error occurred during login.");
+                errorJLabel.setVisible(true);
+            }
             
         }
         else if(loginType == 2){

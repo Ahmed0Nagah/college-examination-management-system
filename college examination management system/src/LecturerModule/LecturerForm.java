@@ -5,9 +5,12 @@ import LecturerModule.Exam;
 import UserModule.MainMenu;
 import UserModule.UpdateForm;
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.GridLayout;
 import java.awt.Stroke;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -25,14 +28,15 @@ import javax.swing.table.DefaultTableModel;
 
 
 public class LecturerForm extends javax.swing.JFrame {
-        
+
+    
+    
     
     DefaultListModel<String>createExamQuestions=new   DefaultListModel <>(); 
     DefaultListModel<String> examsModel = new DefaultListModel<>();
     DefaultListModel<String> modifyExamQuestions = new DefaultListModel<>();
-    DefaultTableModel reportingModel = new DefaultTableModel();
     
-   
+    DefaultTableModel reportingModel = new DefaultTableModel();
 
     
     ArrayList< Exam > exams=new ArrayList<>();
@@ -58,67 +62,64 @@ public class LecturerForm extends javax.swing.JFrame {
 
         helloMessege.setText("Hello, " + lecturer.getName());
         
+        reportingModel.addColumn("Student id");
+        reportingModel.addColumn("Student name");
+        reportingModel.addColumn("Course name");
+        reportingModel.addColumn("Grade");
         
-        addData();
+        fillReportFile();
+        fillTableData();
+        addData();        
     }    
     
+    private void fillTableData(){
+        Object[] Data = new String[4];
+        
+        try (Scanner reader = new Scanner(new File("src\\report_data.txt"))){
+            while(reader.hasNextLine()){
+                String Line = reader.nextLine();
+                Data = Line.split(" ");
+                reportingModel.addRow(Data);
+            }
+        } catch (Exception e) {
+            System.out.println("File not found!\n");
+        }    
+    }
     
+    private void fillReportFile() {
+        String studentName;
+        String studentId;
 
-        
-        
-//        try (Scanner examReader = new Scanner(new File("src\\exams.txt"))) {
-//            while (examReader.hasNextLine()) {
-//            String examLine = examReader.nextLine();
-//            String[] exam = examLine.split(" "); // Split the line by spaces
-//
-//            String courseName = exam[0]; // First part is the course name
-//            String duration = exam[1];   // Second part is the duration
-//            
-//            questions.clear();
-//            correctAnswers.clear();
-//
-//        try(Scanner questionReader = new Scanner(new File("src\\questions.txt"))){
-//            while(questionReader.hasNextLine()){
-//                String questionLine = questionReader.nextLine();
-//                String[] question = questionLine.split(" ");
-//                
-//                StringBuilder fullQuestion = new StringBuilder();
-//                for (String part : question) {
-//                    fullQuestion.append(part).append(" ");
-//                }
-//                questions.add(fullQuestion.toString().trim());
-//            }
-//        }
-//        try(Scanner answerReader = new Scanner(new File("src\\correctAnswers.txt"))){
-//            while(answerReader.hasNextLine()){
-//                String answerLine = answerReader.nextLine();
-//                String[] answer = answerLine.split(" ");
-//                
-//                StringBuilder fullAnswer = new StringBuilder();
-//                for (String part : answer) {
-//                    fullAnswer.append(part).append(" ");
-//                }
-//                correctAnswers.add(fullAnswer.toString().trim());
-//               }
-//
-//            }
-//       
-//        
-//
-//
-//
-//             Add the parsed exam to the list
-//            exams.add(new Exam(duration, questions, correctAnswers, courseName));
-//            examsModel.addElement(courseName); // Populate the UI model
-//                }
-//            } catch (IOException e) {
-//            System.out.println("File not found or error reading the file.");
-//        }
-//
-//        
-//   
-//        
-//    }
+
+        String inputFilePath = "src/Students.txt";
+        String outputFilePath = "src/report_data.txt";
+
+        try (Scanner reader = new Scanner(new File(inputFilePath));
+            PrintWriter writer = new PrintWriter(new FileWriter(outputFilePath, false))) { 
+
+
+            while (reader.hasNextLine()) {
+                String line = reader.nextLine();
+                String[] data = line.split(" ");
+
+
+                if (data.length >= 2) {
+                    studentId = data[0];
+                    studentName = data[1];
+
+
+                        writer.println(studentId + " " + studentName + " CS 10");
+                    } else {
+                        System.err.println("Invalid line format: " + line);
+                }
+            }
+
+            } catch (FileNotFoundException e) {
+                System.err.println("Input file not found: " + inputFilePath);
+                } catch (IOException e) {
+                    System.err.println("Error writing to file: " + outputFilePath);
+                    }
+    }
 
         
         
@@ -575,9 +576,6 @@ public class LecturerForm extends javax.swing.JFrame {
 
         reportingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
                 {null, null, null, null}
             },
             new String [] {
@@ -587,16 +585,9 @@ public class LecturerForm extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
-            boolean[] canEdit = new boolean [] {
-                true, false, false, true
-            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         jScrollPane5.setViewportView(reportingTable);
@@ -800,7 +791,7 @@ public class LecturerForm extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        new UpdateForm().setVisible(true);
+        new UpdateForm(2).setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed

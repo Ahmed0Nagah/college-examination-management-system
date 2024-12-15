@@ -1,13 +1,17 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package AdminModule;
 
-/**
- *
- * @author Ahmed Nagah
- */
-public class Admin {
+
+public class Admin extends UserModule.User{
+    private static int id;
+
+    public Admin(String name, String password) {
+        super(name, password);
+        id++;
+    }
+
+    @Override
+    public int getID() {
+        return id;
+    }
     
 }
