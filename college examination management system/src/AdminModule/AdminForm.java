@@ -3,9 +3,15 @@ package AdminModule;
 import UserModule.UpdateForm;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.*;
+import java.util.*;
 
 
 public class AdminForm extends javax.swing.JFrame {
@@ -48,6 +54,30 @@ public class AdminForm extends javax.swing.JFrame {
         }
     }
 
+
+    private void searchInTableByID(JTable table, String query) {
+        
+        int rowCount = table.getRowCount();
+
+        
+        for (int i = 0; i < rowCount; i++) {
+            
+            String idValue = table.getValueAt(i, 0).toString();
+
+            
+            if (idValue.toLowerCase().equals(query.toLowerCase())) {
+                
+                table.setRowSelectionInterval(i, i); 
+                table.scrollRectToVisible(table.getCellRect(i, 0, true)); 
+                return; 
+            }
+        }
+
+        
+        table.clearSelection();
+    }
+
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,15 +102,25 @@ public class AdminForm extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("Search user:");
+        jLabel1.setText("Search user by id :");
 
         searchButton.setText("Search");
+        searchButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchButtonActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Lectureres");
 
         jLabel3.setText("Students");
 
         deleteUserButton.setText("Delete user");
+        deleteUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                deleteUserButtonActionPerformed(evt);
+            }
+        });
 
         UpdateUserButton.setText("Update user");
         UpdateUserButton.addActionListener(new java.awt.event.ActionListener() {
@@ -138,9 +178,9 @@ public class AdminForm extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 351, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(211, 211, 211)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(181, 181, 181)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(searchButton))
@@ -162,9 +202,9 @@ public class AdminForm extends javax.swing.JFrame {
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(searchButton))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -187,8 +227,88 @@ public class AdminForm extends javax.swing.JFrame {
 
     private void addUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUserButtonActionPerformed
         // TODO add your handling code here:
+        new AddUserForm().setVisible(true);
         
     }//GEN-LAST:event_addUserButtonActionPerformed
+
+    private void deleteUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_deleteUserButtonActionPerformed
+        // TODO add your handling code here:
+        int selectedLecRow = lectueresTable.getSelectedRow();
+        int selectedStuRow = studentsTable.getSelectedRow();
+
+        if (selectedLecRow != -1) {
+            int columnCount = lectueresTable.getColumnCount();
+
+            String[] lecturerRowData = new String[columnCount];
+
+            for (int i = 0; i < columnCount; i++) {
+                lecturerRowData[i] = lectueresTable.getValueAt(selectedLecRow, i).toString();
+            }
+            ArrayList<String> lines = new ArrayList<>();
+            try (Scanner fileReader = new Scanner(new File("src\\Lecturers.txt"))) {
+                while (fileReader.hasNextLine()) {
+                    String oldLine = fileReader.nextLine();
+                    String[] oldContent = oldLine.split(" ");
+
+                    if (!Arrays.equals(lecturerRowData, oldContent)) {
+                        lines.add(oldLine);
+                    }
+                }
+
+            } catch (IOException e) {
+                System.out.println("File not found!");
+            }
+            try (PrintWriter write = new PrintWriter("src\\Lecturers.txt")) {
+                for (String line : lines) {
+                    write.println(line);
+                }
+            } catch (Exception e) {
+                System.err.println("Error writing to file: " + e.getMessage());
+            }
+            lecturersDefaultTableModel.removeRow(selectedLecRow);
+
+        }
+
+        if (selectedStuRow != -1) {
+            int columnCount = studentsTable.getColumnCount();
+
+            String[] studentRowData = new String[columnCount];
+
+            for (int i = 0; i < columnCount; i++) {
+                studentRowData[i] = studentsTable.getValueAt(selectedStuRow, i).toString();
+            }
+            ArrayList<String> lines = new ArrayList<>();
+            try (Scanner fileReader = new Scanner(new File("src\\Students.txt"))) {
+                while (fileReader.hasNextLine()) {
+                    String oldLine = fileReader.nextLine();
+                    String[] oldContent = oldLine.split(" ");
+
+                    if (!Arrays.equals(studentRowData, oldContent)) {
+                        lines.add(oldLine);
+                    }
+                }
+
+            } catch (IOException e) {
+                System.out.println("File not found!");
+            }
+            try (PrintWriter write = new PrintWriter("src\\Students.txt")) {
+                for (String line : lines) {
+                    write.println(line);
+                }
+            } catch (Exception e) {
+                System.err.println("Error writing to file: " + e.getMessage());
+            }
+
+            studentsDefaultTableModel.removeRow(selectedStuRow);
+        }
+    }//GEN-LAST:event_deleteUserButtonActionPerformed
+
+    private void searchButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchButtonActionPerformed
+        // TODO add your handling code here:
+        searchInTableByID(studentsTable, searchField.getText());
+        searchInTableByID(lectueresTable, searchField.getText());
+        
+    }//GEN-LAST:event_searchButtonActionPerformed
 
     
     public static void main(String args[]) {
