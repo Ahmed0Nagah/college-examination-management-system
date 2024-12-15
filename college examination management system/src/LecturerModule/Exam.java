@@ -13,7 +13,10 @@ public class Exam {
     private String duration;
     private ArrayList<String> correctAnswers = new ArrayList<>();
     private String courseName;
-
+    
+    public Exam(){
+        
+    }
     public Exam(String duration,ArrayList<String> questions, ArrayList<String> correctAnswers,
                 String courseName) {
         

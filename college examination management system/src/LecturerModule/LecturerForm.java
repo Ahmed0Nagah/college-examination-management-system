@@ -600,12 +600,6 @@ public class LecturerForm extends javax.swing.JFrame {
             }
         });
         jScrollPane5.setViewportView(reportingTable);
-        if (reportingTable.getColumnModel().getColumnCount() > 0) {
-            reportingTable.getColumnModel().getColumn(0).setHeaderValue("Student id");
-            reportingTable.getColumnModel().getColumn(1).setHeaderValue("Student name");
-            reportingTable.getColumnModel().getColumn(2).setHeaderValue("Course name");
-            reportingTable.getColumnModel().getColumn(3).setHeaderValue("grade");
-        }
 
         javax.swing.GroupLayout reportingToolsPanelLayout = new javax.swing.GroupLayout(reportingToolsPanel);
         reportingToolsPanel.setLayout(reportingToolsPanelLayout);
