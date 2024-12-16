@@ -243,7 +243,7 @@ public class StudentGUI extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {                                         
         // TODO add your handling code here:
-        new UpdateForm().setVisible(true);
+//        new UpdateForm().setVisible(true);
     }                                        
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {                                         

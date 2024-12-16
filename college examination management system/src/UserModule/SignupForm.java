@@ -4,6 +4,7 @@
  */
 package UserModule;
 
+import AdminModule.Admin;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -134,7 +135,19 @@ public class SignupForm extends javax.swing.JFrame {
     private void signupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_signupButtonActionPerformed
         // TODO add your handling code here:
         if(signUpType == 1){
+            Admin admin = new Admin(usernameField.getText(), passwordField1.getText());
             
+
+
+            String[] newAdmin = {String.valueOf(admin.getID()),usernameField.getText(),passwordField1.getText()}; 
+            String newLine = String.join(" ", newAdmin);
+
+            try(PrintWriter write = new PrintWriter(new FileWriter("src\\Admins.txt",true))) {
+                write.println(newLine);
+
+            }catch(IOException e){
+                System.out.println("File not found!");
+            }
         }
         
         else if(signUpType == 2){

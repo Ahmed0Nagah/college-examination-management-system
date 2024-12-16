@@ -20,11 +20,11 @@ import javax.swing.JOptionPane;
  */
 public class UpdateForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form UpdateForm
-     */
-    public UpdateForm() {
+    private int loginType;
+    
+    public UpdateForm(int loginType) {
         initComponents();
+        this.loginType = loginType;
     }
 
     /**
@@ -161,42 +161,104 @@ public class UpdateForm extends javax.swing.JFrame {
         
         ArrayList<String> lines = new ArrayList<>();
         boolean idExist = false;
-        
-        try(Scanner fileReader = new Scanner(new File("src\\Lecturers.txt"))){
-            
-            
-            
-            while(fileReader.hasNext()){
-                String oldLine = fileReader.nextLine();
-                String [] oldContent = oldLine.split(" ");
-                
-                if(oldContent[0].equals(updatedContent[0])){
-                    idExist = true;
-                    lines.add(updatedLine);
-                }
-                else{
-                    lines.add(oldLine);
-                }
-            }
-        } catch (FileNotFoundException ex) {
-            System.err.println("File not found: " + ex.getMessage());
-        }
-        
-        if(!idExist){
-            JOptionPane.showMessageDialog(null, "The entered ID does not exist", "ID not found",JOptionPane.ERROR_MESSAGE);
-            return;
-        }
-        
-        try(PrintWriter write = new PrintWriter("src\\Lecturers.txt")){
-            for(String line : lines){
-                write.println(line);
-            }
-        }catch(Exception e){
-            System.err.println("Error writing to file: " + e.getMessage());
-        }
-        JOptionPane.showMessageDialog(null, "Your information has been updated successfully!", "Update Successful", JOptionPane.INFORMATION_MESSAGE);
+        if(loginType == 2){
+            try (Scanner fileReader = new Scanner(new File("src\\Lecturers.txt"))) {
+                while (fileReader.hasNext()) {
+                    String oldLine = fileReader.nextLine();
+                    String[] oldContent = oldLine.split(" ");
 
-        dispose();
+                    if (oldContent[0].equals(updatedContent[0])) {
+                        idExist = true;
+                        lines.add(updatedLine);
+                    } else {
+                        lines.add(oldLine);
+                    }
+                }
+                if (!idExist) {
+                    JOptionPane.showMessageDialog(null, "The entered ID does not exist", "ID not found", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                try (PrintWriter write = new PrintWriter("src\\Lecturers.txt")) {
+                    for (String line : lines) {
+                        write.println(line);
+                    }
+                } catch (Exception e) {
+                    System.err.println("Error writing to file: " + e.getMessage());
+                }
+                JOptionPane.showMessageDialog(null, "Your information has been updated successfully!", "Update Successful", JOptionPane.INFORMATION_MESSAGE);
+
+                dispose();
+            } catch (FileNotFoundException ex) {
+                System.err.println("File not found: " + ex.getMessage());
+            }
+        }
+        else if(loginType == 1){
+            try (Scanner fileReader = new Scanner(new File("src\\Admins.txt"))) {
+                while (fileReader.hasNext()) {
+                    String oldLine = fileReader.nextLine();
+                    String[] oldContent = oldLine.split(" ");
+
+                    if (oldContent[0].equals(updatedContent[0])) {
+                        idExist = true;
+                        lines.add(updatedLine);
+                    } else {
+                        lines.add(oldLine);
+                    }
+                }
+                if (!idExist) {
+                    JOptionPane.showMessageDialog(null, "The entered ID does not exist", "ID not found", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                try (PrintWriter write = new PrintWriter("src\\Admins.txt")) {
+                    for (String line : lines) {
+                        write.println(line);
+                    }
+                } catch (Exception e) {
+                    System.err.println("Error writing to file: " + e.getMessage());
+                }
+                JOptionPane.showMessageDialog(null, "Your information has been updated successfully!", "Update Successful", JOptionPane.INFORMATION_MESSAGE);
+
+                dispose();
+            } catch (FileNotFoundException ex) {
+                System.err.println("File not found: " + ex.getMessage());
+            }
+        }
+        else{
+            try (Scanner fileReader = new Scanner(new File("src\\Students.txt"))) {
+                while (fileReader.hasNext()) {
+                    String oldLine = fileReader.nextLine();
+                    String[] oldContent = oldLine.split(" ");
+
+                    if (oldContent[0].equals(updatedContent[0])) {
+                        idExist = true;
+                        lines.add(updatedLine);
+                    } else {
+                        lines.add(oldLine);
+                    }
+                }
+                if (!idExist) {
+                    JOptionPane.showMessageDialog(null, "The entered ID does not exist", "ID not found", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+
+                try (PrintWriter write = new PrintWriter("src\\Students.txt")) {
+                    for (String line : lines) {
+                        write.println(line);
+                    }
+                } catch (Exception e) {
+                    System.err.println("Error writing to file: " + e.getMessage());
+                }
+                JOptionPane.showMessageDialog(null, "Your information has been updated successfully!", "Update Successful", JOptionPane.INFORMATION_MESSAGE);
+
+                dispose();
+            } catch (FileNotFoundException ex) {
+                System.err.println("File not found: " + ex.getMessage());
+            }
+        }
+        
+        
         
     }//GEN-LAST:event_updateSubmitActionPerformed
 
@@ -208,37 +270,37 @@ public class UpdateForm extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(UpdateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(UpdateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(UpdateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(UpdateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new UpdateForm().setVisible(true);
-            }
-        });
-    }
+//    public static void main(String args[]) {
+//        /* Set the Nimbus look and feel */
+//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+//         */
+//        try {
+//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+//                if ("Nimbus".equals(info.getName())) {
+//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+//                    break;
+//                }
+//            }
+//        } catch (ClassNotFoundException ex) {
+//            java.util.logging.Logger.getLogger(UpdateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (InstantiationException ex) {
+//            java.util.logging.Logger.getLogger(UpdateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (IllegalAccessException ex) {
+//            java.util.logging.Logger.getLogger(UpdateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+//            java.util.logging.Logger.getLogger(UpdateForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//        }
+//        //</editor-fold>
+//
+//        /* Create and display the form */
+//        java.awt.EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                new UpdateForm().setVisible(true);
+//            }
+//        });
+//    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelbutton;
