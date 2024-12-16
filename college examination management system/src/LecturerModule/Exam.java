@@ -41,6 +41,29 @@ public class Exam {
     public ArrayList<String> getCorrectAnswers() {
         return correctAnswers;
     }
+    public ArrayList<String> getCorrectAnswersfile(String coursename) {
+        ArrayList<String> corrects = new ArrayList<>();
+        try (Scanner answerReader = new Scanner(new File("src\\correctAnswers.txt"))) {
+            while (answerReader.hasNextLine()) {
+                String answerLine = answerReader.nextLine();
+                String[] answer = answerLine.split(" "); // Split answer into parts
+
+                // Combine parts to form the full answer
+                if (answer[0].equals(coursename)) {
+                    for (int i = 1; i < answer.length; i++) {
+                        corrects.add(answer[i]);
+
+                    }
+
+                }
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("sad hahahahhaha");
+        }
+        return corrects;
+    }
 
     public String getDuration() {
         return duration;
@@ -152,13 +175,15 @@ public class Exam {
     this.questions = newQuestions;
     this.correctAnswers = newCorrectAnswers;
     }
-    public int[] gradeExam(ArrayList<String> studentAnswers) {
+    public int[] gradeExam(ArrayList<String> studentAnswers,String coursename) {
         int score = 0;
       int []wronganswers=new int[4];
+      ArrayList <String> correctes=new ArrayList<>();
+      correctes=getCorrectAnswersfile(coursename);
         for (int i = 0; i < studentAnswers.size(); i++) {
             
             // Compare the student's answer with the correct answer
-            if (studentAnswers.get(i).equals(correctAnswers.get(i))) {
+            if (studentAnswers.get(i).equals(correctes.get(i))) {
                 // The answer is correct
                score ++;
                 
