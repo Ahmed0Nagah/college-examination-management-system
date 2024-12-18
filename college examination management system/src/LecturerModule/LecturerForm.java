@@ -761,40 +761,43 @@ public class LecturerForm extends javax.swing.JFrame {
     }//GEN-LAST:event_modifyCorrectAnswerActionPerformed
 
     private void examslistValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_examslistValueChanged
-        // TODO add your handling code here:
-         
-        String selectedExamName = examslist.getSelectedValue();
-        questionsList.clearSelection(); 
-        modifyExamQuestions.clear(); 
-        if (selectedExamName != null) { 
-            for (Exam exam : exams) {
-                if (exam.getCourseName().equals(selectedExamName)) {
-                    for (String question : exam.getQuestions()) {
-                        modifyExamQuestions.addElement(question);   
+        // TODO add your handling code here: 
+        if (!evt.getValueIsAdjusting()) {
+            String selectedExamName = examslist.getSelectedValue();
+            questionsList.clearSelection();
+            modifyExamQuestions.clear();
+            if (selectedExamName != null) {
+                for (Exam exam : exams) {
+                    if (exam.getCourseName().equals(selectedExamName)) {
+                        for (String question : exam.getQuestions()) {
+                            modifyExamQuestions.addElement(question);
+                            questionsList.updateUI();
+                        }
+                        break;
                     }
-                    break; 
                 }
             }
         }
-        
+
     }//GEN-LAST:event_examslistValueChanged
 
     private void questionsListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_questionsListValueChanged
-        // TODO add your handling code here:     
+        // TODO add your handling code here:    
+        if (evt.getValueIsAdjusting()) {
             String selectedExamName = examslist.getSelectedValue();
-            for(Exam exam : exams){
-                    if(exam.getCourseName().equals(selectedExamName)){
-                        int selectedIndex = questionsList.getSelectedIndex();
-                        
-                        if(selectedIndex >= 0 && selectedIndex < exam.getQuestions().size()){
+            for (Exam exam : exams) {
+                if (exam.getCourseName().equals(selectedExamName)) {
+                    int selectedIndex = questionsList.getSelectedIndex();
+
+//                    if (selectedIndex >= 0 && selectedIndex < exam.getQuestions().size()) {
                         modifyCourseName.setText(exam.getCourseName());
                         modifyDuration.setText(exam.getDuration());
                         modifyQuestion.setText(exam.getQuestions().get(selectedIndex));
                         modifyCorrectAnswer.setText(exam.getCorrectAnswers().get(selectedIndex));
-                        }
                     }
-                    break;
-                }
+//                }
+            }
+        }
 //        modifyQuestion.setText(questionsList.getSelectedValue());
         
     }//GEN-LAST:event_questionsListValueChanged
