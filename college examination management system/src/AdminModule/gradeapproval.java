@@ -18,18 +18,18 @@ import java.util.Scanner;
 public class gradeapproval extends javax.swing.JFrame {
     DefaultTableModel GradesModel = new DefaultTableModel();
   
+    Exam exam=new Exam();
     
-  Exam exam=new Exam();
     
-    
-    /**
-     * 
-     */
     public gradeapproval() {
         initComponents();
-        /*exam.gradeExam(studentAnswers, coursename)*/
-      
         grade_table.setModel(GradesModel);
+        
+        GradesModel.addColumn("Student id");
+        GradesModel.addColumn("Student name");
+        GradesModel.addColumn("Course name");
+        GradesModel.addColumn("Grade");
+        fillTableData();
     }
         
     private void fillTableData(){
