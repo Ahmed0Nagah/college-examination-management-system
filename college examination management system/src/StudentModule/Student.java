@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Student extends UserModule.User{
     
-    private static int id = 100;
+    private static int id = 101;
 
     public Student ( String name , String password) {
 	super ( name , password);
