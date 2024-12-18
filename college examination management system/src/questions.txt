@@ -1,3 +1,3 @@
-CS what-is-your-name? 
+CS what-is-your-name? how-are-you? what-is-your-best-player?
 HR how-are-you? 
 DS hello? go? lol? 

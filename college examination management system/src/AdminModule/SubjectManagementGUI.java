@@ -13,7 +13,7 @@ import AdminModule.Admin;
 import java.util.List;
 import java.util.Map;
 public class SubjectManagementGUI extends javax.swing.JFrame {
-    Admin admin = new Admin();
+    
 
     /**
      * Creates new form SubjectManagementGUI
@@ -136,7 +136,7 @@ public class SubjectManagementGUI extends javax.swing.JFrame {
         String subjectName = jTextFieldSubjectName.getText();
 
         if (!subjectId.isEmpty() && !subjectName.isEmpty()) {
-            admin.addSubject(subjectId, subjectName);
+            
             jTextArea1.setText("Subject added successfully!\nSubject ID: " + subjectId + "\nSubject Name: " + subjectName);
         } else {
             jTextArea1.setText("Error: Subject ID and Name cannot be empty.");
@@ -149,20 +149,13 @@ public class SubjectManagementGUI extends javax.swing.JFrame {
 
     private void jButtonViewSubjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonViewSubjectsActionPerformed
         // TODO add your handling code here:                                                   
-        Map<String, String> subjects = admin.getSubjects();
+        
         StringBuilder output = new StringBuilder("Subjects List:\n");
 
-        for (Map.Entry<String, String> entry : subjects.entrySet()) {
-            output.append("ID: ").append(entry.getKey()).append(", Name: ").append(entry.getValue()).append("\n");
-        }
         
-        if (subjects.isEmpty()) {
-            jTextArea1.setText("No subjects available.");
-        } else {
-            jTextArea1.setText(output.toString());
-        }
-    }
         
+        
+       
     }//GEN-LAST:event_jButtonViewSubjectsActionPerformed
 
     /**
@@ -210,4 +203,4 @@ public class SubjectManagementGUI extends javax.swing.JFrame {
     private javax.swing.JTextField jTextFieldSubjectId;
     private javax.swing.JTextField jTextFieldSubjectName;
     // End of variables declaration//GEN-END:variables
-
+}

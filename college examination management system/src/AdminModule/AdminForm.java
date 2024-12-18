@@ -336,6 +336,7 @@ public class AdminForm extends javax.swing.JFrame {
     private void publishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_publishButtonActionPerformed
         // TODO add your handling code here:
         new gradeapproval().setVisible(true);
+        
     }//GEN-LAST:event_publishButtonActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
