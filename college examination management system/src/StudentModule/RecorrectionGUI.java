@@ -9,6 +9,9 @@ package StudentModule;
  * @author HP
  */
 import javax.swing.JOptionPane;
+import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 public class RecorrectionGUI extends javax.swing.JFrame {
 
     /**
@@ -39,6 +42,11 @@ public class RecorrectionGUI extends javax.swing.JFrame {
 
         jComboBox1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "IT", "DS", "CS", "SW" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
 
         jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jButton1.setText("Submit Recorrection Request");
@@ -78,10 +86,12 @@ public class RecorrectionGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String selectedCourse = (String) jComboBox1.getSelectedItem();
-        JOptionPane.showMessageDialog(this, "Re-correction request submitted for Subject: " + selectedCourse);
+
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments

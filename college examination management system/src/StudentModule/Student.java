@@ -6,7 +6,8 @@ import java.util.*;
 
 public class Student extends UserModule.User{
     
-    private static int id = 101;
+    private static int id = 100;
+    private boolean hasEnteredExam = false;
 
     public Student ( String name , String password) {
 	super ( name , password);
@@ -17,7 +18,15 @@ public class Student extends UserModule.User{
     public int getID( ) {
 	return id;
     }
-
+    
+    public boolean get_hasEnteredExam(){
+        return hasEnteredExam;
+    }
+    
+    public void set_hasEnteredExam(boolean hasEnteredExam){
+        this.hasEnteredExam = hasEnteredExam;
+    }
+    
 //====================================================================================================================
 
 public static int correctExam(String answer, String course, String examName) {

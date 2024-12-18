@@ -11,7 +11,7 @@ import javax.swing.JOptionPane;
  * @author dohah
  */
 public class CourseExams extends javax.swing.JFrame {
-
+    Student s = new Student("d", "123");
     /**
      * Creates new form CourseExams
      */
@@ -160,6 +160,8 @@ public class CourseExams extends javax.swing.JFrame {
     }//GEN-LAST:event_button5ActionPerformed
 
     private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
+        if(!s.get_hasEnteredExam()){
+            s.set_hasEnteredExam(true);}
         dispose();
         new ExamsGUI("src\\CS_Exam.txt","CS").setVisible(true);           // TODO add your handling code here:
     }//GEN-LAST:event_button6ActionPerformed
