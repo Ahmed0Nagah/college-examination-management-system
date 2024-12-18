@@ -236,7 +236,7 @@ public class LecturerForm extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         questionsList = new javax.swing.JList<>();
         jLabel20 = new javax.swing.JLabel();
-        jButton5 = new javax.swing.JButton();
+        modifyExam = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         reportingToolsPanel = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
@@ -455,13 +455,13 @@ public class LecturerForm extends javax.swing.JFrame {
         jLabel20.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel20.setText("Questions");
 
-        jButton5.setBackground(new java.awt.Color(255, 153, 0));
-        jButton5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton5.setForeground(new java.awt.Color(255, 255, 255));
-        jButton5.setText("modify Question");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        modifyExam.setBackground(new java.awt.Color(255, 153, 0));
+        modifyExam.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        modifyExam.setForeground(new java.awt.Color(255, 255, 255));
+        modifyExam.setText("modify Question");
+        modifyExam.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                modifyExamActionPerformed(evt);
             }
         });
 
@@ -497,7 +497,7 @@ public class LecturerForm extends javax.swing.JFrame {
                                     .addComponent(modifyCourseName, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(modifyExamPanelLayout.createSequentialGroup()
                                 .addGap(50, 50, 50)
-                                .addComponent(jButton5)))
+                                .addComponent(modifyExam)))
                         .addGap(18, 18, 18)
                         .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modifyExamPanelLayout.createSequentialGroup()
@@ -550,7 +550,7 @@ public class LecturerForm extends javax.swing.JFrame {
                     .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(modifyExamPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
+                    .addComponent(modifyExam)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(81, Short.MAX_VALUE))
         );
@@ -799,7 +799,7 @@ public class LecturerForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_questionsListValueChanged
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void modifyExamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modifyExamActionPerformed
         // TODO add your handling code here:
         String question = modifyQuestion.getText();
         String correct = modifyCorrectAnswer.getText();
@@ -815,7 +815,7 @@ public class LecturerForm extends javax.swing.JFrame {
         
         
         
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_modifyExamActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -871,7 +871,6 @@ public class LecturerForm extends javax.swing.JFrame {
     private javax.swing.JLabel helloMessege;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
@@ -895,6 +894,7 @@ public class LecturerForm extends javax.swing.JFrame {
     private javax.swing.JTextField modifyCorrectAnswer;
     private javax.swing.JTextField modifyCourseName;
     private javax.swing.JTextField modifyDuration;
+    private javax.swing.JButton modifyExam;
     private javax.swing.JPanel modifyExamPanel;
     private javax.swing.JTextField modifyQuestion;
     private javax.swing.JList<String> questionsList;

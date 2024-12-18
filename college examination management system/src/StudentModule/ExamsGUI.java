@@ -215,11 +215,11 @@ public class ExamsGUI extends javax.swing.JFrame {
         String answers = answer1GUI.getText() + answer2GUI.getText() + answer3GUI.getText();
         ArrayList<String> studentAnswers = new ArrayList<>();
         studentAnswers.add(""+answer1GUI);
-        studentAnswers.add(""+answer2GUI);
-        studentAnswers.add(""+answer3GUI);
+        studentAnswers.add(" "+answer2GUI);
+        studentAnswers.add(" "+answer3GUI);
                 
         Exam exam = new Exam();
-        int grade = exam.gradeExam(studentAnswers);
+        int[] grade = exam.gradeExam(studentAnswers,"CS");
         
         gradeGUI.setText(""+grade);
 
