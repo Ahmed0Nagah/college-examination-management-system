@@ -198,27 +198,20 @@ return questions;
     this.questions = newQuestions;
     this.correctAnswers = newCorrectAnswers;
     }
-    public int[] gradeExam(ArrayList<String> studentAnswers,String coursename) {
+    public String gradeExam(ArrayList<String> studentAnswers, String coursename) {
         int score = 0;
-      int []wronganswers=new int[4];
-      ArrayList <String> correctes=new ArrayList<>();
-      correctes=getCorrectAnswersfile(coursename);
+        ArrayList<String> correctes = new ArrayList<>();
+        correctes = getCorrectAnswersfile(coursename);
         for (int i = 0; i < studentAnswers.size(); i++) {
-            
+
             // Compare the student's answer with the correct answer
             if (studentAnswers.get(i).equals(correctes.get(i))) {
                 // The answer is correct
-               score ++;
-                
-            } else {
-                
-                wronganswers[i]= i+1;
-                
-                
-            }
-        } wronganswers[3] = score;
+                score+=5;
 
-        return wronganswers;
+            }
+        }
+        return score + "";
     }
     
     public void modifyquestion(String question, int index){

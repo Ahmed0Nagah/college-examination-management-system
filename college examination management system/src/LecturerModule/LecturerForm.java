@@ -89,6 +89,7 @@ public class LecturerForm extends javax.swing.JFrame {
     private void fillReportFile() {
         String studentName;
         String studentId;
+        String StudentCourse;
 
 
         String inputFilePath = "src/Students.txt";
@@ -103,12 +104,13 @@ public class LecturerForm extends javax.swing.JFrame {
                 String[] data = line.split(" ");
 
 
-                if (data.length >= 2) {
+                if (data.length >= 3) {
                     studentId = data[0];
                     studentName = data[1];
+                    StudentCourse = data[3];
 
 
-                        writer.println(studentId + " " + studentName + " CS 10");
+                        writer.println(studentId + " " + studentName +" "+StudentCourse+ " 10");
                     } else {
                         System.err.println("Invalid line format: " + line);
                 }

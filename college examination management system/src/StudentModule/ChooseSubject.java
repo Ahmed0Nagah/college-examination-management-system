@@ -38,7 +38,7 @@ public class ChooseSubject extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText(" choose your subject : ");
+        jLabel1.setText(" choose operation: ");
 
         jButton1.setBackground(new java.awt.Color(255, 153, 51));
         jButton1.setText("Update");
@@ -111,7 +111,7 @@ public class ChooseSubject extends javax.swing.JFrame {
                             .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
+                        .addGap(85, 85, 85)
                         .addComponent(jLabel1)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );

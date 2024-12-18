@@ -9,7 +9,14 @@ import javax.swing.table.DefaultTableModel;
 import LecturerModule.Exam;
 import StudentModule.Student;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.Scanner;
+import java.util.*;
+import javax.security.auth.callback.ConfirmationCallback;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,6 +25,8 @@ import java.util.Scanner;
 public class gradeapproval extends javax.swing.JFrame {
     DefaultTableModel GradesModel = new DefaultTableModel();
   
+    ArrayList<String> studentAnswers = new ArrayList<String>();
+    
     Exam exam=new Exam();
     
     
@@ -25,11 +34,14 @@ public class gradeapproval extends javax.swing.JFrame {
         initComponents();
         grade_table.setModel(GradesModel);
         
+        
         GradesModel.addColumn("Student id");
         GradesModel.addColumn("Student name");
         GradesModel.addColumn("Course name");
         GradesModel.addColumn("Grade");
+        fillReportFile();
         fillTableData();
+        
     }
         
     private void fillTableData(){
@@ -45,7 +57,66 @@ public class gradeapproval extends javax.swing.JFrame {
             System.out.println("File not found!\n");
         }    
     }
+    private void fillReportFile() {
+            String studentName;
+            String studentId;
+            String studentCourse;
+            String studentGrade = exam.gradeExam(getCorrectAnswersfile("CS"), "CS");
 
+            String inputFilePath = "src\\Students.txt";
+            String outputFilePath = "src\\report_data.txt";
+
+            try (Scanner reader = new Scanner(new File(inputFilePath)); PrintWriter writer = new PrintWriter(new FileWriter(outputFilePath, false))) {
+
+                while (reader.hasNextLine()) {
+                    String line = reader.nextLine();
+                    String[] data = line.split(" ");
+
+                    if (data[3].equals("CS")) {
+                        if (data.length >= 4) {
+                            studentId = data[0];
+                            studentName = data[1];
+                            studentCourse = data[3];
+
+                            writer.println(studentId + " " + studentName + " " + studentCourse + " " + studentGrade);
+                        } else {
+                            System.err.println("Invalid line format: " + line);
+                        }
+                    }
+                }
+
+            } catch (FileNotFoundException e) {
+                System.err.println("Input file not found: " + inputFilePath);
+            } catch (IOException e) {
+                System.err.println("Error writing to file: " + outputFilePath);
+            }
+
+        
+    }
+
+    private ArrayList<String> getCorrectAnswersfile(String coursename) {
+        ArrayList<String> corrects = new ArrayList<>();
+        try (Scanner answerReader = new Scanner(new File("src\\studentAnswers.txt"))) {
+            while (answerReader.hasNextLine()) {
+                String answerLine = answerReader.nextLine();
+                String[] answer = answerLine.split(" "); // Split answer into parts
+
+                // Combine parts to form the full answer
+                if (answer[0].equals(coursename)) {
+                    for (int i = 1; i < answer.length; i++) {
+                        corrects.add(answer[i]);
+
+                    }
+
+                }
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("sad hahahahhaha");
+        }
+        return corrects;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,10 +128,10 @@ public class gradeapproval extends javax.swing.JFrame {
 
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         grade_table = new javax.swing.JTable();
+        publishButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -76,11 +147,6 @@ public class gradeapproval extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jTextField1.setEditable(false);
-        jTextField1.setText("DS");
-
-        jLabel1.setText("coursename :");
 
         grade_table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -100,34 +166,55 @@ public class gradeapproval extends javax.swing.JFrame {
         });
         jScrollPane5.setViewportView(grade_table);
 
+        publishButton.setText("Publish");
+        publishButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                publishButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Grades center");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 12, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(147, 147, 147)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(179, 179, 179)
+                                .addComponent(publishButton, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                .addGap(13, 13, 13)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(110, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(publishButton, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void publishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_publishButtonActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(null, "Grades published succusfully", "Done",JOptionPane.INFORMATION_MESSAGE );
+    }//GEN-LAST:event_publishButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,6 +243,7 @@ public class gradeapproval extends javax.swing.JFrame {
         }
         //</editor-fold>
 
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -166,10 +254,10 @@ public class gradeapproval extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable grade_table;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton publishButton;
     // End of variables declaration//GEN-END:variables
 }

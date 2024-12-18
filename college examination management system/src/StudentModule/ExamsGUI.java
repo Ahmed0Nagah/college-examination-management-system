@@ -4,8 +4,14 @@
  */
 package StudentModule;
 
+import AdminModule.gradeapproval;
 import LecturerModule.Exam;
 import LecturerModule.Lecturer;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 /**
@@ -212,17 +218,13 @@ public class ExamsGUI extends javax.swing.JFrame {
     
     
     private void SubmitGUIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitGUIActionPerformed
-        String answers = answer1GUI.getText() + answer2GUI.getText() + answer3GUI.getText();
-        ArrayList<String> studentAnswers = new ArrayList<>();
-        studentAnswers.add(""+answer1GUI);
-        studentAnswers.add(" "+answer2GUI);
-        studentAnswers.add(" "+answer3GUI);
-                
-        Exam exam = new Exam();
-        int[] grade = exam.gradeExam(studentAnswers,"CS");
-        
-        gradeGUI.setText(""+grade);
 
+        try (PrintWriter write = new PrintWriter(new FileWriter("src\\studentAnswers.txt",true))) {
+            write.println("CS"+" "+answer1GUI.getText()+" "+answer2GUI.getText()+" "+answer3GUI.getText());
+        } catch (IOException e) {
+            System.err.println("Error saving the exam to file: " + e.getMessage());
+        }
+            dispose();
 //        Student.correctExam(answers, course, examName)   ;     // submit
 
 
