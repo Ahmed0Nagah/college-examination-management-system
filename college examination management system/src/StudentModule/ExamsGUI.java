@@ -4,7 +4,7 @@
  */
 package StudentModule;
 
-import AdminModule.gradeapproval;
+
 import LecturerModule.Exam;
 import LecturerModule.Lecturer;
 import java.io.File;
@@ -23,14 +23,12 @@ public class ExamsGUI extends javax.swing.JFrame {
     /**
      * Creates new form ExamsGUI
      */
-    public ExamsGUI(String path,String Course) {
+    public ExamsGUI() {
         initComponents();
-        ExamFile(path,Course);
+        
     }
 
-    private ExamsGUI() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.

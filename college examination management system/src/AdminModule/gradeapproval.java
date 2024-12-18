@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package AdminModule;
 
 import javax.swing.DefaultListModel;
@@ -34,12 +30,12 @@ public class gradeapproval extends javax.swing.JFrame {
         initComponents();
         grade_table.setModel(GradesModel);
         
-        
+        studentAnswers.addAll(getCorrectAnswersfile("CS"));
         GradesModel.addColumn("Student id");
         GradesModel.addColumn("Student name");
         GradesModel.addColumn("Course name");
         GradesModel.addColumn("Grade");
-        fillReportFile();
+        
         fillTableData();
         
     }
@@ -57,42 +53,44 @@ public class gradeapproval extends javax.swing.JFrame {
             System.out.println("File not found!\n");
         }    
     }
-    private void fillReportFile() {
-            String studentName;
-            String studentId;
-            String studentCourse;
-            String studentGrade = exam.gradeExam(getCorrectAnswersfile("CS"), "CS");
-
-            String inputFilePath = "src\\Students.txt";
-            String outputFilePath = "src\\report_data.txt";
-
-            try (Scanner reader = new Scanner(new File(inputFilePath)); PrintWriter writer = new PrintWriter(new FileWriter(outputFilePath, false))) {
-
-                while (reader.hasNextLine()) {
-                    String line = reader.nextLine();
-                    String[] data = line.split(" ");
-
-                    if (data[3].equals("CS")) {
-                        if (data.length >= 4) {
-                            studentId = data[0];
-                            studentName = data[1];
-                            studentCourse = data[3];
-
-                            writer.println(studentId + " " + studentName + " " + studentCourse + " " + studentGrade);
-                        } else {
-                            System.err.println("Invalid line format: " + line);
-                        }
-                    }
-                }
-
-            } catch (FileNotFoundException e) {
-                System.err.println("Input file not found: " + inputFilePath);
-            } catch (IOException e) {
-                System.err.println("Error writing to file: " + outputFilePath);
-            }
-
-        
-    }
+//    private void fillReportFile() {
+//            String studentName;
+//            String studentId;
+//            String studentCourse;
+//            
+//            
+//            
+//
+//            String inputFilePath = "src\\Students.txt";
+//            String outputFilePath = "src\\report_data.txt";
+//
+//            try (Scanner reader = new Scanner(new File(inputFilePath)); PrintWriter writer = new PrintWriter(new FileWriter(outputFilePath, false))) {
+//
+//                while (reader.hasNextLine()) {
+//                    String line = reader.nextLine();
+//                    String[] data = line.split(" ");
+//
+//                    if (data[3].equals("CS")) {
+//                        if (data.length >= 4) {
+//                            studentId = data[0];
+//                            studentName = data[1];
+//                            studentCourse = data[3];
+//
+//                            writer.println(studentId + " " + studentName + " " + studentCourse + " " + studentGrade);
+//                        } else {
+//                            System.err.println("Invalid line format: " + line);
+//                        }
+//                    }
+//                }
+//
+//            } catch (FileNotFoundException e) {
+//                System.err.println("Input file not found: " + inputFilePath);
+//            } catch (IOException e) {
+//                System.err.println("Error writing to file: " + outputFilePath);
+//            }
+//
+//        
+//    }
 
     private ArrayList<String> getCorrectAnswersfile(String coursename) {
         ArrayList<String> corrects = new ArrayList<>();
@@ -214,6 +212,7 @@ public class gradeapproval extends javax.swing.JFrame {
     private void publishButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_publishButtonActionPerformed
         // TODO add your handling code here:
         JOptionPane.showMessageDialog(null, "Grades published succusfully", "Done",JOptionPane.INFORMATION_MESSAGE );
+        dispose();
     }//GEN-LAST:event_publishButtonActionPerformed
 
     /**

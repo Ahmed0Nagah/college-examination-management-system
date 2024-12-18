@@ -45,8 +45,12 @@ public class Student_1 {
 
         // Feedback Mechanism
         // Create an instance of Feedback and submit the feedback
+<<<<<<< HEAD
 //        Feedback feedback = new Feedback();
 //        feedback.submitFeedback(studentId, courseName, rating);
+=======
+        Feedback feedback = new Feedback();
+>>>>>>> 4fa2283a9e1371d820d3f1fdaca0963c038a1dee
 
     }
 }

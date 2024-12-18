@@ -225,5 +225,34 @@ return questions;
         return "Course name : "+this.courseName+" duration: "+getDuration()+" questions: "+getQuestions()+" correct answers: "+getCorrectAnswers();
     }
     
+// public static void main(String[] args){
+//     Exam exam = new Exam();
+//     ArrayList<String> studentAnswers = exam.getStudentAnswersfile("CS");
+//     System.out.println(exam.gradeExam(studentAnswers, "CS"));
+// }
  
+// 
+// private ArrayList<String> getStudentAnswersfile(String coursename) {
+//        ArrayList<String> corrects = new ArrayList<>();
+//        try (Scanner answerReader = new Scanner(new File("src\\studentAnswers.txt"))) {
+//            while (answerReader.hasNextLine()) {
+//                String answerLine = answerReader.nextLine();
+//                String[] answer = answerLine.split(" "); // Split answer into parts
+//
+//                // Combine parts to form the full answer
+//                if (answer[0].equals(coursename)) {
+//                    for (int i = 1; i < answer.length; i++) {
+//                        corrects.add(answer[i]);
+//
+//                    }
+//
+//                }
+//
+//            }
+//
+//        } catch (IOException e) {
+//            System.out.println("sad hahahahhaha");
+//        }
+//        return corrects;
+//    }
 }
