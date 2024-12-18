@@ -1,22 +1,28 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package AdminModule;
 
+import java.util.ArrayList;
+import UserModule.User;
+
 /**
- *
  * @author Ahmed Nagah
  */
-import java.util.ArrayList;
-
-public class Admin {
+public class Admin extends User {
+    private static int idCounter = 0; // Static counter to auto-increment IDs
     private final ArrayList<Subject> subjects;
     private final ArrayList<Student> students;
+    private final int id;
 
-    public Admin() {
-        subjects = new ArrayList<>();
-        students = new ArrayList<>();
+    // Constructor that initializes admin data
+    public Admin(String name, String password) {
+        super(name, password); // Call the parent class constructor
+        this.id = ++idCounter;
+        this.subjects = new ArrayList<>();
+        this.students = new ArrayList<>();
+    }
+
+    @Override
+    public int getID() {
+        return id;
     }
 
     // 1. Subject Management
@@ -50,4 +56,5 @@ public class Admin {
         return students;
     }
 }
+
 

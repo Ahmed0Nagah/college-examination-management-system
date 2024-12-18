@@ -1,6 +1,4 @@
-1- when click on the role he will choose login or signup if he clicked login he will continue normally
-and if he choose sign up the sign up frame will appear and when he finish will return to the main menu. "Nagah" 
 
-2-design the modify exam tab and make it work "Nagah"
+2- make the modify tab work "Nagah"
 3-reporting tool "Nagah"
 4-automatic grading "Ahmed"

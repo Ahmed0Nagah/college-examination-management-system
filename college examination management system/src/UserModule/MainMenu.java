@@ -162,8 +162,8 @@ public class MainMenu extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void openLoginForm(int role) {
-    dispose();
     new LoginForm(role).setVisible(true);
+    dispose();
 }
 
     

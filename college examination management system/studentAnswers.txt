@@ -1,0 +1,4 @@
+CS
+ java.awt.TextField[textfield0,98,172,197x22,text=mohamed,editable,selection=7-7]
+ java.awt.TextField[textfield1,98,292,197x22,text=a,editable,selection=1-1]
+ java.awt.TextField[textfield2,98,411,197x22,text=s,editable,selection=1-1]
