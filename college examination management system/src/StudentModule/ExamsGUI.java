@@ -25,7 +25,13 @@ public class ExamsGUI extends javax.swing.JFrame {
      */
     public ExamsGUI() {
         initComponents();
+        FileHandler file = new FileHandler();
+        String[] qeustions = file.fileData("src\\questions.txt");
+        String[] data = qeustions[0].split(" ");
         
+        Q1GUI.setText(data[1]);
+        Q2GUI.setText(data[2]);
+        Q3GUI.setText(data[3]);
     }
 
     
@@ -217,7 +223,7 @@ public class ExamsGUI extends javax.swing.JFrame {
     
     private void SubmitGUIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SubmitGUIActionPerformed
 
-        try (PrintWriter write = new PrintWriter(new FileWriter("src\\studentAnswers.txt",true))) {
+        try (PrintWriter write = new PrintWriter(new FileWriter("src\\studentAnswers.txt",false))) {
             write.println("CS"+" "+answer1GUI.getText()+" "+answer2GUI.getText()+" "+answer3GUI.getText());
         } catch (IOException e) {
             System.err.println("Error saving the exam to file: " + e.getMessage());

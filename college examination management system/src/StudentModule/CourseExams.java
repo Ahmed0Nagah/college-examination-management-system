@@ -131,8 +131,11 @@ public class CourseExams extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void button4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button4ActionPerformed
-        dispose();
-        new ExamsGUI().setVisible(true);        // TODO add your handling code here:
+        Exception e = new Exception();
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Error: No Exames In This Course \nDetails: " + e.getMessage(), 
+            "File Error", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);        // TODO add your handling code here:
     }//GEN-LAST:event_button4ActionPerformed
 
     private void button7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button7ActionPerformed
@@ -161,9 +164,13 @@ public class CourseExams extends javax.swing.JFrame {
 
     private void button6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button6ActionPerformed
         if(!s.get_hasEnteredExam()){
-            s.set_hasEnteredExam(true);}
-        dispose();
-        new ExamsGUI().setVisible(true);           // TODO add your handling code here:
+            s.set_hasEnteredExam(true);
+//            button6.setVisible(false);
+            new ExamsGUI().setVisible(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "You already entered this exam before!", "One try per exam", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_button6ActionPerformed
 
     /**

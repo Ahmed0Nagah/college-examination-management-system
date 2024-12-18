@@ -73,26 +73,26 @@ public class Exam {
      
         return questions ;
     }
-     public ArrayList<String> getQuestionsfile(String coursename) {
-     ArrayList<String> questionss = new ArrayList<>();
-     try (Scanner questionReader = new Scanner(new File("src\\questions.txt"))) {
-                    while (questionReader.hasNextLine()) {
-                        String questionLine = questionReader.nextLine();
-                        String[] question = questionLine.split(" "); // Split question into parts
+    public ArrayList<String> getQuestionsfile(String coursename) {
+        ArrayList<String> questionss = new ArrayList<>();
+        try (Scanner questionReader = new Scanner(new File("src\\questions.txt"))) {
+            while (questionReader.hasNextLine()) {
+                String questionLine = questionReader.nextLine();
+                String[] question = questionLine.split(" "); // Split question into parts
 
-                        // Combine parts to form the full question
-                        if(question[0].equals(coursename)){
-                            for (int i = 1; i<question.length;i++) {
-                                questionss.add(question[i]);
-                            }
-
-                        }
+                // Combine parts to form the full question
+                if (question[0].equals(coursename)) {
+                    for (int i = 1; i < question.length; i++) {
+                        questionss.add(question[i]);
                     }
-                } catch (IOException e) {
-                    System.out.println("Error reading questions file: " + e.getMessage());
+
                 }
-return questions;
-        
+            }
+        } catch (IOException e) {
+            System.out.println("Error reading questions file: " + e.getMessage());
+        }
+        return questionss;
+
     }
 
     
