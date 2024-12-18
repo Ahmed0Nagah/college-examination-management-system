@@ -57,7 +57,6 @@ public class LecturerForm extends javax.swing.JFrame {
         initComponents();
         showquestion.setModel(createExamQuestions);
         examslist.setModel(examsModel);
-        examslist1.setModel(examsModel);
         questionsList.setModel(modifyExamQuestions);
         reportingTable.setModel(reportingModel);
 
@@ -242,15 +241,6 @@ public class LecturerForm extends javax.swing.JFrame {
         reportingToolsPanel = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         reportingTable = new javax.swing.JTable();
-        automaticGradingPanel = new javax.swing.JPanel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        examslist1 = new javax.swing.JList<>();
-        jLabel19 = new javax.swing.JLabel();
-        jButton8 = new javax.swing.JButton();
-        noQuestionField = new javax.swing.JTextField();
-        gradeField = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
-        jLabel22 = new javax.swing.JLabel();
         helloMessege = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
@@ -617,83 +607,6 @@ public class LecturerForm extends javax.swing.JFrame {
 
         mainTabs.addTab("Reporting Tool", reportingToolsPanel);
 
-        examslist1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        examslist1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                examslist1ValueChanged(evt);
-            }
-        });
-        jScrollPane4.setViewportView(examslist1);
-
-        jLabel19.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel19.setText("Exams");
-
-        jButton8.setText("automate grades");
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton8ActionPerformed(evt);
-            }
-        });
-
-        noQuestionField.setEditable(false);
-
-        gradeField.setEditable(false);
-
-        jLabel21.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel21.setText("no.questions");
-
-        jLabel22.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel22.setText("The grade");
-
-        javax.swing.GroupLayout automaticGradingPanelLayout = new javax.swing.GroupLayout(automaticGradingPanel);
-        automaticGradingPanel.setLayout(automaticGradingPanelLayout);
-        automaticGradingPanelLayout.setHorizontalGroup(
-            automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                                .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(gradeField)
-                                    .addComponent(noQuestionField)))
-                            .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                                .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25))
-        );
-        automaticGradingPanelLayout.setVerticalGroup(
-            automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel19)
-                .addGap(1, 1, 1)
-                .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(automaticGradingPanelLayout.createSequentialGroup()
-                        .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(noQuestionField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel21))
-                        .addGap(18, 18, 18)
-                        .addGroup(automaticGradingPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(gradeField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel22))
-                        .addGap(51, 51, 51)
-                        .addComponent(jButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane4))
-                .addGap(34, 34, 34))
-        );
-
-        mainTabs.addTab("Automatic Grading", automaticGradingPanel);
-
         helloMessege.setFont(new java.awt.Font("Times New Roman", 1, 18)); // NOI18N
         helloMessege.setText("Hello,");
 
@@ -853,7 +766,6 @@ public class LecturerForm extends javax.swing.JFrame {
         String selectedExamName = examslist.getSelectedValue();
         questionsList.clearSelection(); 
         modifyExamQuestions.clear(); 
-
         if (selectedExamName != null) { 
             for (Exam exam : exams) {
                 if (exam.getCourseName().equals(selectedExamName)) {
@@ -887,10 +799,6 @@ public class LecturerForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_questionsListValueChanged
 
-    private void examslist1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_examslist1ValueChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_examslist1ValueChanged
-
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
         String question = modifyQuestion.getText();
@@ -908,18 +816,6 @@ public class LecturerForm extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
-        ArrayList<String> hi = new ArrayList<>();
-        hi.add("by-bus");
-        for(Exam exam : exams){
-            if(examslist1.getSelectedValue().equals(exam.getCourseName())){
-                noQuestionField.setText(String.valueOf(exam.getQuestions().size()));
-                gradeField.setText(String.valueOf(exam.gradeExam(hi)));
-            }
-        }
-    }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
@@ -969,29 +865,22 @@ public class LecturerForm extends javax.swing.JFrame {
     private javax.swing.JTabbedPane ExamTabs;
     private java.awt.Button REMOVEquestion;
     private java.awt.Button Submit;
-    private javax.swing.JPanel automaticGradingPanel;
     private javax.swing.JPanel createExamPanel;
     private javax.swing.JPanel examManagmentPanel;
     private javax.swing.JList<String> examslist;
-    private javax.swing.JList<String> examslist1;
-    private javax.swing.JTextField gradeField;
     private javax.swing.JLabel helloMessege;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton8;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1001,7 +890,6 @@ public class LecturerForm extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane mainTabs;
     private javax.swing.JTextField modifyCorrectAnswer;
@@ -1009,7 +897,6 @@ public class LecturerForm extends javax.swing.JFrame {
     private javax.swing.JTextField modifyDuration;
     private javax.swing.JPanel modifyExamPanel;
     private javax.swing.JTextField modifyQuestion;
-    private javax.swing.JTextField noQuestionField;
     private javax.swing.JList<String> questionsList;
     private javax.swing.JTable reportingTable;
     private javax.swing.JPanel reportingToolsPanel;
