@@ -4,6 +4,7 @@ package LecturerModule;
 import LecturerModule.Exam;
 import UserModule.MainMenu;
 import UserModule.UpdateForm;
+import com.sun.source.tree.BreakTree;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.GridLayout;
@@ -479,6 +480,11 @@ public class LecturerForm extends javax.swing.JFrame {
         jButton6.setForeground(new java.awt.Color(255, 255, 255));
         jButton6.setText("Remove question");
         jButton6.setPreferredSize(new java.awt.Dimension(148, 31));
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout modifyExamPanelLayout = new javax.swing.GroupLayout(modifyExamPanel);
         modifyExamPanel.setLayout(modifyExamPanelLayout);
@@ -843,17 +849,18 @@ public class LecturerForm extends javax.swing.JFrame {
 
     private void examslistValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_examslistValueChanged
         // TODO add your handling code here:
-        
+         
         String selectedExamName = examslist.getSelectedValue();
-        
-        if(selectedExamName != null){
-            modifyExamQuestions.clear();
-            for(Exam exam : exams){
-                if(exam.getCourseName().equals(selectedExamName)){
-                    
-                    for(String question : exam.getQuestions()){
-                        modifyExamQuestions.addElement(question);
+        questionsList.clearSelection(); 
+        modifyExamQuestions.clear(); 
+
+        if (selectedExamName != null) { 
+            for (Exam exam : exams) {
+                if (exam.getCourseName().equals(selectedExamName)) {
+                    for (String question : exam.getQuestions()) {
+                        modifyExamQuestions.addElement(question);   
                     }
+                    break; 
                 }
             }
         }
@@ -861,21 +868,21 @@ public class LecturerForm extends javax.swing.JFrame {
     }//GEN-LAST:event_examslistValueChanged
 
     private void questionsListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_questionsListValueChanged
-        // TODO add your handling code here:
-        String selectedExamName = examslist.getSelectedValue();
-        
-        for(Exam exam : exams){
-                if(exam.getCourseName().equals(selectedExamName)){
-                    modifyCourseName.setText(exam.getCourseName());
-                    modifyDuration.setText(exam.getDuration());
-                    
-                    int selectedIndex = questionsList.getSelectedIndex();
-                    modifyQuestion.setText(exam.getQuestions().get(selectedIndex));
-                    modifyCorrectAnswer.setText(exam.getCorrectAnswers().get(selectedIndex));
+        // TODO add your handling code here:     
+            String selectedExamName = examslist.getSelectedValue();
+            for(Exam exam : exams){
+                    if(exam.getCourseName().equals(selectedExamName)){
+                        int selectedIndex = questionsList.getSelectedIndex();
+                        
+                        if(selectedIndex >= 0 && selectedIndex < exam.getQuestions().size()){
+                        modifyCourseName.setText(exam.getCourseName());
+                        modifyDuration.setText(exam.getDuration());
+                        modifyQuestion.setText(exam.getQuestions().get(selectedIndex));
+                        modifyCorrectAnswer.setText(exam.getCorrectAnswers().get(selectedIndex));
+                        }
+                    }
+                    break;
                 }
-            }
-        
-        
 //        modifyQuestion.setText(questionsList.getSelectedValue());
         
     }//GEN-LAST:event_questionsListValueChanged
@@ -913,6 +920,11 @@ public class LecturerForm extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
