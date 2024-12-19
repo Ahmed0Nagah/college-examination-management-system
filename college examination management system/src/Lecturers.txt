@@ -1,4 +1,3 @@
 1 Ahmed 1 CS
 2 maharantos 1234 DS
-4 ola 1234 IS
-6 Fatma 1234 DC
+1 diaa 1234
